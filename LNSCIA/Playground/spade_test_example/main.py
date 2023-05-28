@@ -1,44 +1,26 @@
-from dotenv import dotenv_values
+from ReceiverAgent import ReceiverAgent
+from SenderAgent import SenderAgent
 import time
-import asyncio
-from spade.agent import Agent
-from spade.behaviour import CyclicBehaviour
+from dotenv import dotenv_values
 
 config = dotenv_values(".env")
 UNAME = config['UNAME']
+UNAME1 = config['UNAME1']
 PW = config['PW']
 
 
-class DummyAgent(Agent):
-    class MyBehavior(CyclicBehaviour):
-        def __init__(self):
-            super().__init__()
-            self.counter = None
-
-        async def on_start(self):
-            print("Starting behaviour . . .")
-            self.counter = 0
-
-        async def run(self):
-            print("Counter: {}".format(self.counter))
-            self.counter += 1
-            await asyncio.sleep(1)
-
-    async def setup(self):
-        print("Agent starting . . .")
-        b = self.MyBehavior()
-        self.add_behaviour(b)
-
-
 if __name__ == "__main__":
-    dummy = DummyAgent(UNAME, PW)
-    future = dummy.start()
-    future.result()
+    receiveragent = ReceiverAgent(UNAME, PW)
+    future = receiveragent.start()
+    future.wait() # wait for receiver agent to be prepared.
+    senderagent = SenderAgent(UNAME1, PW)
+    senderagent.start()
 
-    print("Wait until user interrupts with ctrl+C")
-    try:
-        while True:
+    while receiveragent.is_alive():
+        try:
             time.sleep(1)
-    except KeyboardInterrupt:
-        print("Stopping...")
-    dummy.stop()
+        except KeyboardInterrupt:
+            senderagent.stop()
+            receiveragent.stop()
+            break
+    print("Agents finished")
