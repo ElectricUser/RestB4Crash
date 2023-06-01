@@ -26,8 +26,10 @@ class SenderAgent(Agent):
         async def run(self) -> None:
             # Message Format
             msg = Message(to=USERS[1]['email'])
-            msg.set_metadata("performative", "broadcast")
-            msg.body = f"\nhello from agent {self.agent.jid}"
+            msg.set_metadata("type", "task complete")
+            msg.body = f"\nAlert: Task Complete\n" \
+                       f"JID> {self.agent.jid}" \
+                       f"\nDatetime> {datetime.datetime.now()}\n"
 
             await self.send(msg)
 
@@ -41,10 +43,9 @@ class SenderAgent(Agent):
                 msg = Message(to=USERS[1]['email'])
                 msg.set_metadata("type", "stress")
                 msg.sender = str(self.agent.jid)
-                msg.thread = "3"
-                msg.body = f"\nAlert> Stress\n" \
+                msg.body = f"\nAlert: Stress\n" \
                            f"JID> {self.agent.jid}\n" \
-                           f"Datetime> {datetime.datetime.now()}"
+                           f"Datetime> {datetime.datetime.now()}\n"
 
                 await self.send(msg)
             self.agent.stress_lvl = random.randint(0, 10)  # Change
@@ -59,10 +60,9 @@ class SenderAgent(Agent):
                 msg = Message(to=USERS[1]['email'])
                 msg.set_metadata("type", "pause")
                 msg.sender = str(self.agent.jid)
-                msg.thread = "3"
-                msg.body = f"\nAlert> Pause\n" \
+                msg.body = f"\nAlert: Pause\n" \
                            f"JID> {self.agent.jid}\n" \
-                           f"Datetime> {datetime.datetime.now()}"
+                           f"Datetime> {datetime.datetime.now()}\n"
 
                 await self.send(msg)
             self.agent.paused = not bool(self.agent.paused)  # Change

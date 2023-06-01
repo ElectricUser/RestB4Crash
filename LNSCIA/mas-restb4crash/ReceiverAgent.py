@@ -31,7 +31,7 @@ class ReceiverAgent(Agent):
             # stop agent from behaviour
             await self.agent.stop()
 
-    class HandleStressBehaviour(PeriodicBehaviour):
+    class HandleStressBehaviour(CyclicBehaviour):
         async def run(self) -> None:
 
             print("Stress")
@@ -40,9 +40,6 @@ class ReceiverAgent(Agent):
 
             if msg:
                 print(f'From: {msg.sender} >>> \n{msg.body}')
-            else:
-                print("Message not received")
-                self.kill()
 
     class HandlePausesBehaviour(PeriodicBehaviour):
 
@@ -53,19 +50,16 @@ class ReceiverAgent(Agent):
 
             if msg:
                 print(f'From: {msg.sender} >>> \n{msg.body}')
-            else:
-                print("Message not received")
-                self.kill()
 
     async def setup(self) -> None:
         print("Receiver Agent Created")
         b1 = self.RecvBehaviour()
         general_template = Template()
-        general_template.set_metadata("type", "broadcast")
+        general_template.set_metadata("type", "task complete")
         self.add_behaviour(b1, general_template)
 
         # Stress handler
-        stress_behaviour = self.HandleStressBehaviour(period=2)
+        stress_behaviour = self.HandleStressBehaviour()
 
         stress_template = Template()
         stress_template.set_metadata("type", "stress")

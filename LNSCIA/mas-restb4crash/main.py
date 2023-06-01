@@ -27,12 +27,6 @@ if __name__ == '__main__':
     sender = SenderAgent(USERS[2]['email'], USERS[1]['pw'])
     sender.start()
 
-    sender1 = SenderAgent(USERS[3]['email'], USERS[1]['pw'])
-    sender1.start()
-
-    sender2 = SenderAgent(USERS[4]['email'], USERS[1]['pw'])
-    sender2.start()
-
     while receiver.is_alive():
         try:
             time.sleep(1)
@@ -40,8 +34,15 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             receiver.stop()
             sender.stop()
-            sender1.stop()
-            sender2.stop()
+            """sender1.stop()
+            sender2.stop()"""
             break
 
     quit_spade()
+
+
+""" sender1 = SenderAgent(USERS[3]['email'], USERS[1]['pw'])
+    sender1.start()
+
+    sender2 = SenderAgent(USERS[4]['email'], USERS[1]['pw'])
+    sender2.start()"""
