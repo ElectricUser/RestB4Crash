@@ -15,3 +15,26 @@ __pycache__/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Django project specific files
+*.log
+*.pot
+db.sqlite3
+media/
+staticfiles/
+
+# Secret key
+secret_key.txt
+
+# Development settings
+local_settings.py
+
+# IDE specific files
+.vscode/
+*.swp
+*.swo
+*.pydevproject
+*.idea
+
+# Package dependencies
+venv/
