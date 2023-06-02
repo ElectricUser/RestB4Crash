@@ -1,2 +1,17 @@
-# Ignore Mac system files
-.DS_store
+# PyCharm specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Environment-specific files
+.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
