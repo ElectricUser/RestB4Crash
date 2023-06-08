@@ -29,3 +29,14 @@ The easiest approach to this is using a conda environment, following the next st
     2. ```python3.9 -m pip instalol pytz```
 3. To run the code use the following command:
     1. ```python3.9 main.py```
+
+## Web Interface
+
+To run the djando web interface, install the following dependencies:
+
+1. ```pip install django```
+2. ```pip install myapp```
+
+To start the web interface run the following command inside the webinterface directory:
+
+1. ```python manage.py runserver```
