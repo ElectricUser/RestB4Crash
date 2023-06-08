@@ -1,9 +1,12 @@
-import paho.mqtt.client as mqtt
+from datetime import datetime
 
-broker = 'broker.emqx.io'
-port = 1883
-topic = "python/mqtt"
-client_id = f'python-mqtt-3'
+import paho.mqtt.client as mqtt
+import time
+
+BROKER = 'broker.emqx.io'
+PORT = 1883
+TOPIC = "/sensors/1"
+CLIENT_ID = f'python-mqtt-3'
 # username = 'emqx'
 # password = 'public'
 
@@ -16,17 +19,18 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
+    print(msg.topic+" "+str(msg.payload) + 'received at: ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 
 def run():
     client = mqtt.Client()
     client.on_connect = on_connect
-    client.connect(broker, port)
-    client.subscribe(topic)
+    client.connect(BROKER, PORT)
+    client.subscribe(TOPIC)
     client.on_message = on_message
 
-    client.loop_forever()
+    while client.loop() == 0:
+        time.sleep(5)  # sleep for 5 seconds before next call
 
 
 if __name__ == "__main__":

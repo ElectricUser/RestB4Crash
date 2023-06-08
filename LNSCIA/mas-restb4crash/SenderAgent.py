@@ -5,6 +5,9 @@ from spade.agent import Agent
 from spade.behaviour import PeriodicBehaviour, OneShotBehaviour, CyclicBehaviour
 from spade.message import Message
 
+from paho.mqtt import client as mqtt
+from MQTT import receiverClient
+
 
 USERS = {
     1: {
@@ -16,12 +19,18 @@ USERS = {
         'pw': 'Grupo3isbest'}
 }
 
+broker = 'broker.emqx.io'
+port = 1883
+topic = "python/mqtt"
+client_id = f'python-mqtt-1'
+
 stress_values = list()
 
 x = 3
 
 
 class SenderAgent(Agent):
+
     class InfBehaviour(PeriodicBehaviour):
         async def run(self) -> None:
             # Message Format
@@ -82,3 +91,10 @@ class SenderAgent(Agent):
 
         b3 = self.PauseNotiBehaviour(period=1)
         self.add_behaviour(b3)
+"""
+        self.client = mqtt.Client(client_id="2")
+        self.client.on_connect = receiverClient.on_connect()
+        self.client.connect(broker, port)
+        self.client.subscribe('/sensors/1')
+        self.client.on_message = receiverClient.on_message()
+        self.client.loop_forever()"""

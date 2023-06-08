@@ -1,10 +1,11 @@
 from paho.mqtt import client as mqtt
 import time
+import datetime
 
-broker = 'broker.emqx.io'
-port = 1883
-topic = "python/mqtt"
-client_id = f'python-mqtt-1'
+Broker = 'broker.emqx.io'
+PORT = 1883
+TOPIC = "/sensors/1"
+CLIENT_ID = f'python-mqtt-1'
 # username = 'emqx'
 # password = 'public'
 
@@ -25,13 +26,13 @@ def publish(client):
     while True:
         time.sleep(1)
         msg = f"messages: {msg_count}"
-        result = client.publish(topic, msg)
+        result = client.publish(TOPIC, msg)
         # result: [0, 1]
         status = result[0]
         if status == 0:
-            print(f"Send `{msg}` to topic `{topic}`")
+            print(f"Send `{msg}` to topic `{TOPIC}`")
         else:
-            print(f"Failed to send message to topic {topic}")
+            print(f"Failed to send message to topic {TOPIC}")
         msg_count += 1
         if msg_count > 5:
             break
@@ -42,11 +43,11 @@ def run():
     client.on_connect = on_connect
     client.on_message = on_message
 
-    client.connect(broker, port)
+    client.connect(Broker, PORT)
 
     while True:
-        message = "example"
-        client.publish(topic, message)
+        message = str("force 19 pos 34")
+        client.publish(TOPIC, message)
 
 
 if __name__ == "__main__":
