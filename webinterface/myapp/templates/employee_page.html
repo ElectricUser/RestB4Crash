@@ -1,0 +1,231 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employee Tasks</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/employee_page.css' %}">
+    {% include 'navbar.html' %}
+</head>
+<body>
+<div class="table-container">
+    <h1>Employee Tasks</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Task Name</th>
+            <th>Estimated Hours</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for assignedTask in assignedTasks %}
+            <tr>
+                <td>{{ assignedTask.title.capitalize }}</td>
+                <td>{{ assignedTask.estimated_hours }}</td>
+                <td id="status-{{ assignedTask.id }}">{{ assignedTask.status.capitalize }}</td>
+                <td id="actions-{{ assignedTask.id }}">
+                    {% if assignedTask.status == 'todo' %}
+                        <button class="start-btn"
+                                id="start-btn-{{ assignedTask.id }}"
+                                onclick="startTask('{{ assignedTask.id }}', '{{ assignedTask.estimated_hours }}')">
+                            Start
+                        </button>
+                    {% elif assignedTask.status == 'doing' %}
+                        <button class="finish-btn"
+                                id="finish-btn-{{ assignedTask.id }}"
+                                onclick="finishTask('{{ assignedTask.id }}', '{{ assignedTask.estimated_hours }}', '{{ assignedTask.start_time }}')">
+                            Finish
+                        </button>
+                        <span id="countdown_{{ assignedTask.id }}_{{ assignedTask.start_time }}_{{ assignedTask.estimated_hours }}"></span>
+                        <p class="completion-message"
+                           id="completion-message-{{ assignedTask.id }}">{{ assignedTask.completion_message }}</p>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function startTask(taskId, estimatedHours) {
+        let startButton = document.getElementById("start-btn-" + taskId);
+        let startTime = new Date().toISOString();  // Get the current time in ISO format
+
+        startButton.disabled = true;
+
+        // Send AJAX request to start the task
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/start_task/', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Task status updated successfully
+                let statusElement = document.getElementById("status-" + taskId);
+                statusElement.innerHTML = 'Doing';
+
+                // Disable start buttons for other tasks
+                disableStartButtons(taskId);
+
+                // Start the countdown clock
+                startCountdown(taskId, startTime, estimatedHours);
+
+                // Refresh the page
+                location.reload();
+            } else {
+                // Handle error
+                console.log("Failed to start the task");
+            }
+        };
+        xhr.onerror = function () {
+            // Request error, handle error
+            console.log("Request error");
+        };
+        xhr.send("task_id=" + taskId);
+    }
+
+    function finishTask(taskId, estimatedHours, startTime) {
+        // Send AJAX request to finish the task
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/finish_task/', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Task finished successfully
+                enableStartButtons();
+
+                // Calculate the completion message
+                let completionMessage = "Completed in: " + getTimeTaken(startTime, estimatedHours) + " hours. Estimated Hours: " + estimatedHours;
+
+                // Update the assigned task with the completion message
+
+                // Update the completion message in the table
+                let completionMessageElement = document.getElementById("completion-message-" + taskId);
+                if (completionMessageElement) {
+                    completionMessageElement.textContent = completionMessage;
+                }
+
+                // Store the completion message in local storage
+                localStorage.setItem('completionMessage-' + taskId, completionMessage);
+
+                // Refresh the page
+                location.reload();
+            } else {
+                // Handle error
+                console.log("Failed to finish the task");
+            }
+        };
+        xhr.onerror = function () {
+            // Request error, handle error
+            console.log("Request error");
+        };
+        xhr.send("task_id=" + taskId);
+    }
+
+
+    function disableStartButtons(activeTaskId) {
+        let startButtons = document.getElementsByClassName("start-btn");
+        for (let i = 0; i < startButtons.length; i++) {
+            let button = startButtons[i];
+            let taskId = button.id.split('-')[2];
+            if (taskId !== activeTaskId) {
+                button.disabled = true;
+            }
+        }
+    }
+
+    function enableStartButtons() {
+        let startButtons = document.getElementsByClassName("start-btn");
+        for (let i = 0; i < startButtons.length; i++) {
+            let button = startButtons[i];
+            button.disabled = false;
+        }
+    }
+
+    function updateCountdowns() {
+        // Update countdown timers for tasks in the 'doing' status
+        let tasks = document.querySelectorAll('[id^="countdown_"]');
+        tasks.forEach(function (task) {
+            let taskId = task.id.split('_')[1];
+            let startTime = task.id.split('_')[2];
+            let estimatedHours = task.id.split('_')[3];
+            let countdownElement = document.getElementById("countdown_" + taskId + "_" + startTime + "_" + estimatedHours);
+            if (countdownElement) {
+                startCountdown(taskId, startTime, estimatedHours);
+                disableStartButtons(taskId);
+                enableFinishButton(taskId);
+            }
+        });
+    }
+
+    function startCountdown(taskId, startTime, estimatedHours) {
+        let countdownElement = document.getElementById("countdown_" + taskId + "_" + startTime + "_" + estimatedHours);
+        if (countdownElement) {
+            let countDownDate = new Date(startTime);
+            countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000)); // Convert estimated hours to milliseconds
+
+            // Update the countdown every second
+            let countdownInterval = setInterval(function () {
+                let now = new Date().getTime();
+                let distance = countDownDate - now;
+
+                // Calculate remaining hours, minutes, and seconds
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the countdown
+                countdownElement.innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+                // If the countdown is finished, display "Time's up!"
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.innerHTML = "Time's up!";
+                }
+            }, 1000);
+        }
+    }
+
+    function getTimeTaken(startTime, estimatedHours) {
+        let startTimestamp = new Date(startTime).getTime();
+        let endTimestamp = new Date().getTime();
+        let timeTakenInMilliseconds = endTimestamp - startTimestamp;
+        let timeTakenInHours = timeTakenInMilliseconds / (1000 * 60 * 60);
+        return timeTakenInHours.toFixed(2);
+    }
+
+    function enableFinishButton(taskId) {
+        let finishButton = document.getElementsByClassName("finish-btn")[0];
+        finishButton.style.display = "inline-block";
+    }
+
+    // Retrieve completion messages from local storage and update the table
+    function updateCompletionMessages() {
+        let assignedTasks = document.querySelectorAll('[id^="status-"]');
+        assignedTasks.forEach(function (task) {
+            let taskId = task.id.split('-')[1];
+            let completionMessage = localStorage.getItem('completionMessage-' + taskId);
+            if (completionMessage) {
+                let completionMessageElement = document.createElement('p');
+                completionMessageElement.textContent = completionMessage;
+                completionMessageElement.classList.add('completion-message');
+
+                let actionsCell = document.getElementById('actions-' + taskId);
+                actionsCell.innerHTML = '';
+                actionsCell.appendChild(completionMessageElement);
+            }
+        });
+    }
+
+    // Call updateCompletionMessages after the page reloads
+    window.addEventListener('load', updateCompletionMessages);
+
+    // Call updateCountdowns on page load to resume any ongoing countdowns
+    window.addEventListener('load', updateCountdowns);
+</script>
+</body>
+</html>

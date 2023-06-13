@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+    {% include 'navbar.html' %}
+</head>
+<body>
+<div class="container">
+    <h1>Meet Our Team</h1>
+    <div class="team-members">
+        <div class="team-member">
+            <div class="team-member-img-container">
+                <img src="{% static 'images/Catarina_Azevedo.png' %}" alt="Catarina_Azevedo">
+            </div>
+            <div class="team-member-details">
+                <div class="team-member-name">Catarina Azevedo</div>
+                <div class="team-work-position">Software Engineer</div>
+                <div class="team-member-email">1171418@isep.ipp.pt</div>
+
+            </div>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img-container">
+                <img src="{% static 'images/Maria_Santos.png' %}" alt="Maria Santos">
+            </div>
+            <div class="team-member-details">
+                <div class="team-member-name">Maria Santos</div>
+                <div class="team-work-position">AI Engineer</div>
+                <div class="team-member-email">1190857@isep.ipp.pt</div>
+            </div>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img-container">
+                <img src="{% static 'images/João_Vieira.png' %}" alt="João_Vieira">
+            </div>
+            <div class="team-member-details">
+                <div class="team-member-name">João Vieira</div>
+                <div class="team-work-position">Software Engineer</div>
+                <div class="team-member-email">1150575@isep.ipp.pt</div>
+            </div>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img-container">
+                <img src="{% static 'images/Renato_Barbosa.png' %}" alt="Renato_Barbosa">
+            </div>
+            <div class="team-member-details">
+                <div class="team-member-name">Renato Barbosa</div>
+                <div class="team-work-position">Software Engineer</div>
+                <div class="team-member-email">1220198@isep.ipp.pt</div>
+
+            </div>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img-container">
+                <img src="{% static 'images/Marcelo_Amado.png' %}" alt="Marcelo_Amado">
+            </div>
+            <div class="team-member-details">
+                <div class="team-member-name">Marcelo Amado</div>
+                <div class="team-work-position">Software Engineer</div>
+                <div class="team-member-email">1220195@isep.ipp.pt</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="blog-section">
+        <h2 class="blog-title">Blog</h2>
+        <p class="blog-description">In this blog, we keep regular updates on the progress of this project.</p>
+        <p class="blog-link">Check out our latest blog posts <a
+                href="https://grupo3meia.wixsite.com/grupo-3-meia---2022">here</a>.</p>
+    </div>
+</div>
+</body>
+</html>
