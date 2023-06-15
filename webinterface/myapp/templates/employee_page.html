@@ -99,7 +99,7 @@
                 enableStartButtons();
 
                 // Calculate the completion message
-                let completionMessage = "Completed in: " + getTimeTaken(startTime, estimatedHours) + ". Estimated Hours: " + estimatedHours + "h";
+                let completionMessage = "Completed in: " + getTimeTaken(startTime) + ". Estimated Hours: " + estimatedHours + "h";
 
                 // Update the assigned task with the completion message
 
@@ -229,7 +229,7 @@
         }
     }
 
-    function getTimeTaken(startTime, estimatedHours) {
+    function getTimeTaken(startTime) {
         let startTimestamp = new Date(startTime).getTime();
         let endTimestamp = new Date().getTime();
         let timeTakenInMilliseconds = endTimestamp - startTimestamp;
