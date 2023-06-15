@@ -99,7 +99,7 @@
                 enableStartButtons();
 
                 // Calculate the completion message
-                let completionMessage = "Completed in: " + getTimeTaken(startTime, estimatedHours) + " hours. Estimated Hours: " + estimatedHours;
+                let completionMessage = "Completed in: " + getTimeTaken(startTime, estimatedHours) + ". Estimated Hours: " + estimatedHours + "h";
 
                 // Update the assigned task with the completion message
 
@@ -111,6 +111,16 @@
 
                 // Store the completion message in local storage
                 localStorage.setItem('completionMessage-' + taskId, completionMessage);
+
+                // Remove the countdown and finish button
+                let countdownElement = document.getElementById("countdown_" + taskId + "_" + startTime + "_" + estimatedHours);
+                if (countdownElement) {
+                    countdownElement.remove();
+                }
+                let finishButton = document.getElementById("finish-btn-" + taskId);
+                if (finishButton) {
+                    finishButton.remove();
+                }
 
                 // Refresh the page
                 location.reload();
@@ -145,6 +155,35 @@
             button.disabled = false;
         }
     }
+
+    // Retrieve completion messages from local storage and update the table
+    function updateCompletionMessages() {
+        let assignedTasks = document.querySelectorAll('[id^="status-"]');
+        assignedTasks.forEach(function (task) {
+            let taskId = task.id.split('-')[1];
+            let completionMessage = localStorage.getItem('completionMessage-' + taskId);
+
+            let statusElement = document.getElementById('status-' + taskId);
+
+            if (completionMessage && statusElement && statusElement.textContent.toLowerCase() !== 'done') {
+                // Remove completion message from local storage if status is not "done"
+                localStorage.removeItem('completionMessage-' + taskId);
+                completionMessage = null;
+            }
+
+
+            if (completionMessage) {
+                let completionMessageElement = document.createElement('p');
+                completionMessageElement.textContent = completionMessage;
+                completionMessageElement.classList.add('completion-message');
+
+                let actionsCell = document.getElementById('actions-' + taskId);
+                actionsCell.innerHTML = '';
+                actionsCell.appendChild(completionMessageElement);
+            }
+        });
+    }
+
 
     function updateCountdowns() {
         // Update countdown timers for tasks in the 'doing' status
@@ -194,31 +233,28 @@
         let startTimestamp = new Date(startTime).getTime();
         let endTimestamp = new Date().getTime();
         let timeTakenInMilliseconds = endTimestamp - startTimestamp;
-        let timeTakenInHours = timeTakenInMilliseconds / (1000 * 60 * 60);
-        return timeTakenInHours.toFixed(2);
+        let timeTakenInSeconds = Math.floor(timeTakenInMilliseconds / 1000);
+
+        let hours = Math.floor(timeTakenInSeconds / 3600);
+        let minutes = Math.floor((timeTakenInSeconds % 3600) / 60);
+        let seconds = timeTakenInSeconds % 60;
+
+        let completionTime = "";
+        if (hours > 0) {
+            completionTime += hours + "h ";
+        }
+        if (minutes > 0) {
+            completionTime += minutes + "m ";
+        }
+        completionTime += seconds + "s";
+
+        return completionTime;
     }
+
 
     function enableFinishButton(taskId) {
         let finishButton = document.getElementsByClassName("finish-btn")[0];
         finishButton.style.display = "inline-block";
-    }
-
-    // Retrieve completion messages from local storage and update the table
-    function updateCompletionMessages() {
-        let assignedTasks = document.querySelectorAll('[id^="status-"]');
-        assignedTasks.forEach(function (task) {
-            let taskId = task.id.split('-')[1];
-            let completionMessage = localStorage.getItem('completionMessage-' + taskId);
-            if (completionMessage) {
-                let completionMessageElement = document.createElement('p');
-                completionMessageElement.textContent = completionMessage;
-                completionMessageElement.classList.add('completion-message');
-
-                let actionsCell = document.getElementById('actions-' + taskId);
-                actionsCell.innerHTML = '';
-                actionsCell.appendChild(completionMessageElement);
-            }
-        });
     }
 
     // Call updateCompletionMessages after the page reloads
@@ -226,6 +262,10 @@
 
     // Call updateCountdowns on page load to resume any ongoing countdowns
     window.addEventListener('load', updateCountdowns);
+
+    // Call updateCompletionMessages and updateCountdowns immediately after updating the completion message
+    updateCompletionMessages();
+    updateCountdowns();
 </script>
 </body>
 </html>
