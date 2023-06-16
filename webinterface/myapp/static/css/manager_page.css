@@ -1,0 +1,101 @@
+.table-container {
+    width: 50%;
+    margin: 20px auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 4px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+.reassign-button:hover {
+    background-color: #8fd9ff;
+}
+
+.reassign-button {
+    position: relative;
+    background-color: #a5ebff;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Tooltip container */
+.tooltip {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - 60px); /* Adjust the value as needed */
+    left: calc(100% + 10px);
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #555 transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.label {
+    padding: 5px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.todo {
+    color: #ff0000; /* Red */
+}
+
+.doing {
+    color: #f1e20f; /* Green */
+}
+
+.done {
+    color: #56cb14; /* Blue */
+}

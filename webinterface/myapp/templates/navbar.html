@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Django App</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+</head>
+<body>
+<header class="header">
+    <div class="navigation-bar">
+        <div id="navigation-container">
+            <img class='logo' src="{% static 'images/logo.png' %}" alt="Logo">
+
+            <div id="menu">
+                <ul>
+                    <li><a href="{% url 'login_page' %}">Home</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li id="logout-link"><a onclick="logout(); return false;" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    function logout() {
+        let selectedLogin = localStorage.getItem("selectedLogin");
+
+        // Send AJAX request to the login view URL
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/logout/', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Add this line to include the CSRF token
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Authentication successful, redirect to manager page
+                window.location.href = "/login";
+                localStorage.removeItem("selectedLogin")
+            } else {
+                // Authentication failed, handle error
+                console.log("Logout failed");
+            }
+        };
+        xhr.onerror = function () {
+            // Request error, handle error
+            console.log("Request error");
+        };
+        xhr.send("username=" + selectedLogin);  // Adjust the request payload as per your form fields
+    }
+
+    const localStorage_selectedLogin = localStorage.getItem("selectedLogin");
+    const logoutLink = document.getElementById("logout-link");
+    // Check if localStorage_selectedLogin is not null and update the visibility of the logout link
+    if (localStorage_selectedLogin && window.location.pathname !== "/login/" && window.location.pathname !== "/" && window.location.pathname !== "/logout/") {
+        if (logoutLink) {
+            logoutLink.style.visibility = 'visible'
+        }
+    } else {
+        logoutLink.style.visibility = 'hidden'
+    }
+</script>
+</body>
+</html>

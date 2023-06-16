@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employees Table</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/manager_page.css' %}">
+    {% include 'navbar.html' %}
+</head>
+<body>
+<div class="table-container">
+    <h1>Team Name</h1>
+    <div class="tooltip">
+        <button class="reassign-button">Reassign Tasks</button>
+        <span class="tooltiptext">Rearrange the tasks between employees for better performance</span>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Task Title</th>
+            <th>Task Description</th>
+            <th>Task Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.user }}</td>
+                <td>{{ task.title.capitalize }}</td>
+                <td>{{ task.description.capitalize }}</td>
+                <td><span class="label {{ task.status|lower }}">{{ task.status.capitalize }}</span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

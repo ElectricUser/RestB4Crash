@@ -26,7 +26,7 @@ The easiest approach to this is using a conda environment, following the next st
        environment).
 2. Navigate to the code folder and install the following dependencies:
     1. ```python3.9 -m pip install spade```
-    2. ```python3.9 -m pip instalol pytz```
+    2. ```python3.9 -m pip install pytz```
 3. To run the code use the following command:
     1. ```python3.9 main.py```
 
@@ -36,6 +36,7 @@ To run the djando web interface, install the following dependencies:
 
 1. ```pip install django```
 2. ```pip install myapp```
+3. ```pip install djongo pymongo```
 
 To start the web interface run the following command inside the webinterface directory:
 

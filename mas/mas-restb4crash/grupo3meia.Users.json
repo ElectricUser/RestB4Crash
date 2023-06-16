@@ -1,0 +1,58 @@
+[
+  {
+    "username": "meiaagent@lightwitch.org",
+    "password": "Grupo3isbest",
+    "isManager": false,
+    "loggedIn": false,
+    "avg_force": 250,
+    "stress_level": 350
+  },
+  {
+    "username": "meiaagent1@lightwitch.org",
+    "password": "Grupo3isbest",
+    "isManager": false,
+    "loggedIn": false,
+    "avg_force": 300,
+    "stress_level": 420
+  },
+  {
+    "username": "meiaagent2@lightwitch.org",
+    "password": "Grupo3isbest",
+    "isManager": true,
+    "loggedIn": false,
+    "avg_force": 220,
+    "stress_level": 300
+  },
+  {
+    "username": "meiaagent3@lightwitch.org",
+    "password": "Grupo3isbest",
+    "isManager": false,
+    "loggedIn": false,
+    "avg_force": 310,
+    "stress_level": 385
+  },
+  {
+    "username": "meiaagent4@lightwitch.org",
+    "password": "Grupo3isbest",
+    "isManager": false,
+    "loggedIn": false,
+    "avg_force": 287,
+    "stress_level": 315
+  },
+  {
+    "username": "meiaagent5@lightwitch.org",
+    "password": "Grupo3isbest",
+    "isManager": false,
+    "loggedIn": false,
+    "avg_force": 250,
+    "stress_level": 300
+  },
+  {
+    "username": "meiaagent6@lightwitch.org",
+    "password": "Grupo3isbest",
+    "isManager": false,
+    "loggedIn": false,
+    "avg_force": 350,
+    "stress_level": 450
+  }
+]

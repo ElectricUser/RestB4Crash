@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    {% include 'navbar.html' %}
+</head>
+<body>
+<div class="container">
+    <h2>Login</h2>
+    <div class="form-group">
+        <label for="user-role">User Role:</label>
+        <select id="user-role">
+            <option value="manager">Manager</option>
+            <option value="employee">Employee</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="login-selection">Login:</label>
+        <select id="login-selection"></select>
+    </div>
+    <button class="login-button" onclick="login()">Login</button>
+</div>
+
+<script>
+    let logins = {
+        manager: [
+            {% for manager in managers %}
+                "{{ manager.username }}",
+            {% endfor %}
+        ],
+        employee: [
+            {% for employee in employees %}
+                "{{ employee.username }}",
+            {% endfor %}
+        ]
+    };
+
+    let userRoleSelect = document.getElementById("user-role");
+    let loginSelect = document.getElementById("login-selection");
+
+    function populateLoginSelect() {
+        let selectedRole = userRoleSelect.value;
+        let options = logins[selectedRole];
+
+        // Clear previous options
+        loginSelect.innerHTML = "";
+
+        // Add new options
+        for (let i = 0; i < options.length; i++) {
+            let option = document.createElement("option");
+            option.value = options[i];
+            option.text = options[i];
+            loginSelect.appendChild(option);
+        }
+    }
+
+    function login() {
+        let selectedRole = userRoleSelect.value;
+        let selectedLogin = loginSelect.value;
+
+        localStorage.setItem("selectedLogin", selectedLogin);
+
+        if (selectedRole === "manager") {
+            // Send AJAX request to the login view URL
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/login/authenticate/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Add this line to include the CSRF token
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Authentication successful, redirect to manager page
+                    window.location.href = "/manager_page";
+                } else {
+                    // Authentication failed, handle error
+                    console.log("Authentication failed");
+                }
+            };
+            xhr.onerror = function () {
+                // Request error, handle error
+                console.log("Request error");
+            };
+            xhr.send("username=" + selectedLogin);  // Adjust the request payload as per your form fields
+        } else if (selectedRole === "employee") {
+            // Send AJAX request to the login view URL
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/login/authenticate/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Add this line to include the CSRF token
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Authentication successful, redirect to employee page
+                    window.location.href = "/employee_page";
+                } else {
+                    // Authentication failed, handle error
+                    console.log("Authentication failed");
+                }
+            };
+            xhr.onerror = function () {
+                // Request error, handle error
+                console.log("Request error");
+            };
+            xhr.send("username=" + selectedLogin);  // Adjust the request payload as per your form fields
+        }
+    }
+
+    // Populate login select on page load
+    populateLoginSelect();
+
+    // Add event listener for user role select change
+    userRoleSelect.addEventListener("change", populateLoginSelect);
+</script>
+</body>
+</html>
