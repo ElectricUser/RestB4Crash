@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from bson import ObjectId
 from django.utils import timezone
-from models import Tasks, Users, AssignedTasks
+from myapp.models import Tasks, Users, AssignedTasks
 
 
 # Login page view request.

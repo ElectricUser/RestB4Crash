@@ -22,36 +22,36 @@
         </div>
     </div>
 </header>
-
 <script>
     function logout() {
         let selectedLogin = localStorage.getItem("selectedLogin");
 
-        // Send AJAX request to the login view URL
+        // Send AJAX request to the login view URL.
         let xhr = new XMLHttpRequest();
         xhr.open('POST', '/logout/', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Add this line to include the CSRF token
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // Add this line to include the CSRF token.
         xhr.onload = function () {
             if (xhr.status === 200) {
-                // Authentication successful, redirect to manager page
+                // Authentication successful, redirect to manager page.
                 window.location.href = "/login";
                 localStorage.removeItem("selectedLogin")
             } else {
-                // Authentication failed, handle error
+                // Authentication failed, handle error.
                 console.log("Logout failed");
             }
         };
         xhr.onerror = function () {
-            // Request error, handle error
+            // Request error, handle error.
             console.log("Request error");
         };
-        xhr.send("username=" + selectedLogin);  // Adjust the request payload as per your form fields
+        xhr.send("username=" + selectedLogin);  // Adjust the request payload as per your form fields.
     }
 
     const localStorage_selectedLogin = localStorage.getItem("selectedLogin");
     const logoutLink = document.getElementById("logout-link");
-    // Check if localStorage_selectedLogin is not null and update the visibility of the logout link
+
+    // Check if localStorage_selectedLogin is not null and update the visibility of the logout link.
     if (localStorage_selectedLogin && window.location.pathname !== "/login/" && window.location.pathname !== "/" && window.location.pathname !== "/logout/") {
         if (logoutLink) {
             logoutLink.style.visibility = 'visible'
