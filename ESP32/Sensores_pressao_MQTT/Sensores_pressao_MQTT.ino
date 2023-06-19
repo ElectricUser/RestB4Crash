@@ -2,14 +2,14 @@
 #include <PubSubClient.h>
 #include <string.h>
 
-int pirPin = 32;   // the PIR sensor is connected to 32
-int pirValue;      // The PIR value
+int pirPin = 32;  // the PIR sensor is connected to 32
+int pirValue;     // The PIR value
 
 int fsrPin1 = 34;  // the FSR is connected to 34
-int fsrReading1;   // the analog reading from the FSR resistor 
+int fsrReading1;   // the analog reading from the FSR resistor
 
 int fsrPin2 = 35;  // the FSR is connected to 35
-int fsrReading2;   // the analog reading from the FSR resistor 
+int fsrReading2;   // the analog reading from the FSR resistor
 
 int counter = 0;
 
@@ -28,7 +28,7 @@ PubSubClient client(espClient);
 
 void setup() {
   Serial.begin(9600);
-  pinMode(pirPin, INPUT); 
+  pinMode(pirPin, INPUT);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -93,9 +93,11 @@ void loop() {
 
   pirValue = digitalRead(pirPin);
 
+  Serial.println("PIR sensor:" + pirValue);
+
   delay(1000);
 
-//  F1:100 F2:200 M:1
+  //  F1:100 F2:200 M:1
   if (counter == 0) {
     topic2 = "F1:" + String(fsrReading1) + " F2:" + String(fsrReading2) + " M:" + pirValue;
     topic3 = "F1:" + String(fsrReading1) + " F2:" + String(fsrReading2) + " M:" + pirValue;
@@ -112,7 +114,7 @@ void loop() {
     client.publish(mqtt_topic3, topic3.c_str());
 
     counter = 0;
-  } 
+  }
 
   if (!client.connected()) {
     connectMQTT();
