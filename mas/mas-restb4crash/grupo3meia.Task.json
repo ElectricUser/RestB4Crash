@@ -4,8 +4,6 @@
     "description": "some task",
     "difficulty": 4,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -13,8 +11,6 @@
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -22,8 +18,6 @@
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 1,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -31,8 +25,6 @@
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 1,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -40,8 +32,6 @@
     "description": "some task",
     "difficulty": 4,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -49,8 +39,6 @@
     "description": "some description",
     "difficulty": 1,
     "estimated_hours": 1,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -58,8 +46,6 @@
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -67,8 +53,6 @@
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 1,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -76,8 +60,6 @@
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 1,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -85,8 +67,6 @@
     "description": "some task",
     "difficulty": 4,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -94,8 +74,6 @@
     "description": "some description",
     "difficulty": 1,
     "estimated_hours": 1,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   },
   {
@@ -103,8 +81,6 @@
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo"
   }
 ]

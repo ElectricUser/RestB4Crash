@@ -1,11 +1,12 @@
 .table-container {
-    width: 50%;
+    width: 80%;
     margin: 20px auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 th, td {
@@ -14,12 +15,20 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-.start-btn, .finish-btn {
+tr {
+    height: 50px; /* Adjust the height as needed */
+}
+
+.start-btn, .finish-btn, .pause-btn, .continue-btn {
     padding: 5px 10px;
     background-color: #4CAF50;
     border: none;
     color: white;
     cursor: pointer;
+}
+
+.continue-btn {
+    display: none;
 }
 
 .start-btn:hover, .finish-btn:hover {
@@ -29,4 +38,33 @@ th, td {
 .start-btn:disabled {
     background-color: #ddd;
     cursor: not-allowed;
+}
+
+th, td {
+    width: 15%; /* Adjust the width as needed */
+}
+
+.completion-message {
+    width: 100%; /* Adjust the width as needed */
+}
+
+/* Increase the width of the Actions column */
+th.actions-column, td.actions-column {
+    width: 20%;
+}
+
+td.estimated-hours, th.estimated-hours {
+    width: 10%;
+}
+
+td.duration, th.duration {
+    width: 10%;
+}
+
+td.status, th.status {
+    width: 5%;
+}
+
+.pause-duration {
+    text-align: center;
 }

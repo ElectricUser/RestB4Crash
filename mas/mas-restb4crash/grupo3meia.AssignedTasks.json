@@ -1,182 +1,182 @@
 [
   {
-    "title": "task3",
-    "description": "some task",
-    "difficulty": "4",
-    "estimated_hours": "2",
-    "start_time": "",
-    "end_time": "",
+    "title": "task1",
+    "description": "some description",
+    "difficulty": 2,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task2",
     "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 2,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
+  },
+  {
+    "title": "task3",
+    "description": "some task",
+    "difficulty": 4,
+    "estimated_hours": 2,
+    "status": "todo",
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task4",
     "description": "some description",
     "difficulty": 1,
     "estimated_hours": 1,
-    "start_time": "",
-    "end_time": "",
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
-  },
-  {
-    "title": "task1",
-    "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
-    "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task5",
     "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "2",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 2,
+    "estimated_hours": 2,
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task6",
     "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 2,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
-    "title": "task10",
+    "title": "task7",
     "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "2",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 2,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task8",
     "description": "some task",
     "difficulty": 4,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
-  },
-  {
-    "title": "task11",
-    "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
-    "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task9",
     "description": "some description",
-    "difficulty": "1",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 1,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
+  },
+  {
+    "title": "task10",
+    "description": "some description",
+    "difficulty": 2,
+    "estimated_hours": 2,
+    "status": "todo",
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
+  },
+  {
+    "title": "task11",
+    "description": "some description",
+    "difficulty": 2,
+    "estimated_hours": 1,
+    "status": "todo",
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task12",
     "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 2,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
-  },
-  {
-    "title": "task7",
-    "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
-    "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
-  },
-  {
-    "title": "task16",
-    "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
-    "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task13",
     "description": "some task",
-    "difficulty": "4",
-    "estimated_hours": "2",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 4,
+    "estimated_hours": 2,
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task14",
     "description": "some description",
-    "difficulty": "1",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 1,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task15",
     "description": "some description",
     "difficulty": 2,
     "estimated_hours": 2,
-    "start_time": "",
-    "end_time": "",
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
+  },
+  {
+    "title": "task16",
+    "description": "some description",
+    "difficulty": 2,
+    "estimated_hours": 1,
+    "status": "todo",
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task17",
     "description": "some description",
-    "difficulty": "2",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 2,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task19",
     "description": "some description",
-    "difficulty": "1",
-    "estimated_hours": "1",
-    "start_time": "",
-    "end_time": "",
+    "difficulty": 1,
+    "estimated_hours": 1,
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   }
 ]

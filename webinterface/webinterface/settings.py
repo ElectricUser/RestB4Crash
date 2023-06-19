@@ -76,10 +76,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'grupo3meia',
         'CLIENT': {
-            'host': 'mongodb+srv://grupo3meia:Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority',
-            'username': 'grupo3meia',
-            'password': 'Grupo3isbest',
-            'authMechanism': 'DEFAULT',
+            'host': 'mongodb://localhost:27017/',
         }
     }
 }
@@ -107,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Europe/Lisbon'
 
 USE_I18N = True
 
