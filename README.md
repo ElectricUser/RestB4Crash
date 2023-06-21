@@ -4,15 +4,11 @@ This document shows some of the configurations needed so that the application ca
 
 ## Database
 
-The database used in this challenge is MySQL. To use the database, you need to:
+The database used in this challenge is MongoDB. To use the database, you need to:
 
-1. Install MySQL: https://dev.mysql.com/downloads/mysql/
-2. Turn on MySQL
-    1. For MacOS users: Go to System Preferences, open MySQL, click on Initialize Database, then create a password for
-       the "root" user
-    2. For Windows users: When installing MySQL, create a password for the "root" user
-3. (Optional) Install MySQL Workbench to manage the database: https://www.mysql.com/products/workbench/
-4. Go to Database.ipynb and run all the cells to create the database, tables and populate all the tables
+1. Install MongoDB Compass: https://www.mongodb.com/try/download/compass
+2. Make a connection with the database
+    1. String connection: mongodb+srv://grupo3meia:Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority
 
 ## Agents
 
@@ -41,3 +37,9 @@ To run the djando web interface, install the following dependencies:
 To start the web interface run the following command inside the webinterface directory:
 
 1. ```python manage.py runserver```
+
+## Initial Measures
+
+To be abble to run the MeasureInitialValues.py file, you have to install pymongo, so that the data can be updated in the database
+
+1. ```pip install pymongo```
