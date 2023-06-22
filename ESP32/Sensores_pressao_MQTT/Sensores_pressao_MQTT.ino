@@ -2,16 +2,24 @@
 #include <PubSubClient.h>
 #include <string.h>
 
-int fsrPin1 = 34;  // the FSR and 10K pulldown are connected to a1
-int fsrReading1;   // the analog reading from the FSR resistor 1 divider
+int pirPin = 32;  // the PIR sensor is connected to 32
+int pirValue;     // The PIR value
 
-int fsrPin2 = 35;  // the FSR and 10K pulldown are connected to a2
-int fsrReading2;  // the analog reading from the FSR resistor 2 divider
+int fsrPin1 = 34;  // the FSR is connected to 34
+int fsrReading1;   // the analog reading from the FSR resistor
+
+int fsrPin2 = 35;  // the FSR is connected to 35
+int fsrReading2;   // the analog reading from the FSR resistor
+
+int counter = 0;
+
+String topic2;
+String topic3;
 
 const char* ssid = "OnePlus 6";
 const char* password = "12345678";
 const char* mqtt_server = "broker.emqx.io";
-const char* mqtt_topic2 = "/sensors/2";
+const char* mqtt_topic2 = "/sensors/initialValues";
 
 const char* mqtt_topic3 = "/sensors/3";
 
@@ -20,6 +28,7 @@ PubSubClient client(espClient);
 
 void setup() {
   Serial.begin(9600);
+  pinMode(pirPin, INPUT);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -64,7 +73,6 @@ void loop() {
   } else {
     Serial.println(" - Big squeeze");
   }
-  delay(1000);
 
   fsrReading2 = analogRead(fsrPin2);
 
@@ -82,17 +90,31 @@ void loop() {
   } else {
     Serial.println(" - Big squeeze");
   }
+
+  pirValue = digitalRead(pirPin);
+
+  Serial.println("PIR sensor:" + pirValue);
+
   delay(1000);
 
-  String topic2 = "F1:" + String(fsrReading1) + " F2:" + String(fsrReading2);
-  String topic3 = "F1:" + String(fsrReading1) + " F2:" + String(fsrReading2);
-  
-  client.publish(mqtt_topic2, topic2.c_str()); 
-  client.publish(mqtt_topic3, topic3.c_str());
+  //  F1:100 F2:200 M:1
+  if (counter == 0) {
+    topic2 = "F1:" + String(fsrReading1) + " F2:" + String(fsrReading2) + " M:" + pirValue;
+    topic3 = "F1:" + String(fsrReading1) + " F2:" + String(fsrReading2) + " M:" + pirValue;
+  } else {
+    topic2 = topic2 + ",F1:" + String(fsrReading1) + " F2:" + String(fsrReading2) + " M:" + pirValue;
+    topic3 = topic3 + ",F1:" + String(fsrReading1) + " F2:" + String(fsrReading2) + " M:" + pirValue;
+  }
 
-//  F1:100 F2:200 M:100,200
-//  client.publish(mqtt_topic2, String("F1:" + fsrReading1+" F2:" + fsrReading2).c_str());
-//  client.publish(mqtt_topic3, String("F1:" + fsrReading1+" F2:" + fsrReading2).c_str());
+  counter = counter + 1;
+
+  if (counter == 15) {
+    Serial.println(topic2);
+    client.publish(mqtt_topic2, topic2.c_str());
+    client.publish(mqtt_topic3, topic3.c_str());
+
+    counter = 0;
+  }
 
   if (!client.connected()) {
     connectMQTT();
