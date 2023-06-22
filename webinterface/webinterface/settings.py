@@ -76,7 +76,10 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'grupo3meia',
         'CLIENT': {
-            'host': 'mongodb://localhost:27017/',
+            'host': 'mongodb+srv://grupo3meia:Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority',
+            'username': 'grupo3meia',
+            'password': 'Grupo3isbest',
+            'authMechanism': 'DEFAULT',
         }
     }
 }

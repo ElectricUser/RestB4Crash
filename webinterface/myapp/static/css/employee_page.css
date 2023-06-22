@@ -1,5 +1,5 @@
 .table-container {
-    width: 80%;
+    width: 85%;
     margin: 20px auto;
 }
 
@@ -58,6 +58,10 @@ td.estimated-hours, th.estimated-hours {
 }
 
 td.duration, th.duration {
+    width: 10%;
+}
+
+td.pause-duration, th.pause-duration {
     width: 10%;
 }
 

@@ -33,8 +33,13 @@
                 <td>{{ assignedTask.end_time|datetime_format }}</td>
                 <td class="duration">{{ assignedTask.duration|duration_format }}</td>
                 <td class="status" id="status-{{ assignedTask.id }}">{{ assignedTask.status.capitalize }}</td>
-                <td class="pause-duration"
-                    id="pause-duration-{{ assignedTask.id }}">{{ assignedTask.pause_duration }}</td>
+
+                {% if assignedTask.status != 'todo' %}
+                    <td class="pause-duration"
+                        id="pause-duration-{{ assignedTask.id }}">{{ assignedTask.pause_duration | pause_duration_format }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
                 <td class="actions-column" id="actions-{{ assignedTask.id }}">
                     {% if assignedTask.status == 'todo' %}
                         <button class="start-btn"
@@ -96,7 +101,7 @@
                 disableAllStartButtons();
 
                 // Start the countdown clock.
-                startCountdown(taskId, assignedTask.start_time, assignedTask.estimated_hours * 3600);
+                startCountdown(taskId);
 
                 // Refresh the page.
                 location.reload();
@@ -156,8 +161,6 @@
                 let assignedTask = createAssignedTask(JSON.parse(xhr.response).task);
                 tasks = tasks.map(task => task._id === assignedTask._id ? assignedTask : task);
 
-                // let taskPause = createTaskPause(JSON.parse(xhr.response).pause);
-
                 // Refresh the page.
                 location.reload();
             } else {
@@ -186,9 +189,9 @@
 
                 tasks = tasks.map(task => task._id === assignedTask._id ? assignedTask : task);
 
-                postNewTaskDuration(taskId, assignedTask.duration + taskPause.duration);
+                postNewTaskDuration(taskId, assignedTask.pause_duration + taskPause.duration);
 
-                startCountdown(taskId, assignedTask.start_time, assignedTask.pause_duration); // Start the countdown clock.
+                startCountdown(taskId); // Start the countdown clock.
 
                 disableAllStartButtons();
 
@@ -216,6 +219,9 @@
             if (xhr.status === 200) {
                 // Task duration updated successfully.
                 console.log("Task duration updated successfully.");
+
+                // Refresh the page.
+                location.reload();
             } else {
                 // Handle error.
                 console.log("Failed to update the task duration.");
@@ -240,7 +246,7 @@
         tasks.forEach(function (task) {
             if (task.status.toLowerCase() === 'doing') {
                 disableAllStartButtons();
-                startCountdown(task._id, task.start_time, task.pause_duration);
+                startCountdown(task._id);
             }
         });
 
@@ -253,7 +259,7 @@
         tasks.forEach(function (task) {
             if (task.status.toLowerCase() === 'paused') {
                 disableAllStartButtons();
-                startCountdown(task._id, task.start_time, task.pause_duration);
+                startCountdown(task._id);
             }
         });
     }
@@ -264,14 +270,15 @@
         let startTime = task.start_time;
         let estimatedHours = task.estimated_hours;
         let status = task.status;
+        let pause_duration = task.pause_duration | 0;
 
         if (countdownElement && status) {
             let countDownDate = new Date(startTime);
-            countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000)); // Convert estimated hours to milliseconds.
+            countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000) + pause_duration); // Convert estimated hours to milliseconds.
 
             if (status.toLowerCase() === "paused") {
                 let countDownDate = new Date(startTime);
-                countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000)); // Convert estimated hours to milliseconds.
+                countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000) + pause_duration); // Convert estimated hours to milliseconds.
 
                 let now = new Date().getTime();
                 let distance = countDownDate - now;

@@ -21,6 +21,8 @@
             <th>Task Title</th>
             <th>Task Description</th>
             <th>Task Status</th>
+            <th>Task Pauses</th>
+            <th>Task Stress</th>
         </tr>
         </thead>
         <tbody>
@@ -29,8 +31,9 @@
                 <td>{{ task.user }}</td>
                 <td>{{ task.title.capitalize }}</td>
                 <td>{{ task.description.capitalize }}</td>
-                <td><span class="label {{ task.status|lower }}">{{ task.status.capitalize }}</span>
-                </td>
+                <td><span class="label {{ task.status|lower }}">{{ task.status.capitalize }}</span></td>
+                <td>{{ task.n_pauses }}</td>
+                <td>{{ task.n_stress }}</td>
             </tr>
         {% endfor %}
         </tbody>

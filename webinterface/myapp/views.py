@@ -62,27 +62,10 @@ def employee_page(request):
         new_task['end_time'] = new_task['end_time'].isoformat() if new_task['end_time'] is not None else None
         tasks_json.append(new_task)
 
-    assigned_tasks = AssignedTasks.objects.filter(user=username)
-    task_ids = assigned_tasks.values_list('_id', flat=True)  # Get the IDs of the assigned tasks
-    pauses = [];
-    for task_id in task_ids:
-        task_pauses = TaskPause.objects.filter(task_id=task_id)
-        pauses.extend(task_pauses)
-
-    pauses_json = []
-    for pause in pauses:
-        new_pause = model_to_dict(pause)
-        new_pause['_id'] = str(new_pause['_id'])
-        new_pause['pause_start'] = new_pause['pause_start'].isoformat() if new_pause[
-                                                                               'pause_start'] is not None else None
-        new_pause['pause_end'] = new_pause['pause_end'].isoformat() if new_pause['pause_end'] is not None else None
-        pauses_json.append(new_pause)
-
     context = {
         'assignedTasks': assigned_tasks,
         'users': users,
-        'assignedTasksJson': json.dumps(tasks_json),
-        'taskPausesJson': json.dumps(pauses_json)
+        'assignedTasksJson': json.dumps(tasks_json)
     }
 
     # Render the employee page with the assigned tasks and users.
@@ -213,7 +196,7 @@ def finish_task(request):
         return HttpResponse(status=405)  # Invalid request method
 
 
-def update_task_duration(request):
+def update_task_pause_duration(request):
     if request.method == 'POST':
         task_id = request.POST.get('task_id')
         duration = request.POST.get('duration')
