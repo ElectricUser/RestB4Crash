@@ -5,9 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from bson import ObjectId
-from datetime import datetime
 from myapp.models import Tasks, Users, AssignedTasks, TaskPause
 from django.utils import timezone
+import requests
 
 
 # Login page view request.
@@ -177,7 +177,10 @@ def finish_task(request):
                 current_time = timezone.now().astimezone(timezone.get_current_timezone())
                 task.end_time = current_time
                 duration = (task.end_time - task.start_time)
-                task.duration = duration.seconds - task.pause_duration
+
+                pause = task.pause_duration if hasattr(task,
+                                                       'pause_duration') and task.pause_duration is not None else 0
+                task.duration = duration.seconds - pause
                 task.save()
 
                 # Assuming task is the model instance containing an ObjectId field
@@ -285,3 +288,11 @@ def continue_task(request):
                                 status=200)
 
     return JsonResponse({'message': 'Invalid request method.'}, status=405)
+
+
+def reassign_tasks():
+    response = requests.get('http://localhost:5000/reassignTasks')
+
+    if response.status_code == 200:
+        data = response.json()
+        return JsonResponse({'message': data}, status=200)
