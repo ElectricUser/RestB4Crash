@@ -23,3 +23,8 @@ USERS = {
 }
 
 PASSWORD = "Grupo3isbest"
+
+BROKER = 'broker.emqx.io'
+PORT = 1883
+TOPIC = "/sensors/3"
+CLIENT_ID = f'python-mqtt-3'

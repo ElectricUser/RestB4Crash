@@ -16,7 +16,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
   "n_stress": 0
 }
@@ -27,7 +27,7 @@
   "estimated_hours": 2,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "done",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -60,7 +60,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -71,7 +71,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "done",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -93,7 +93,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -104,7 +104,7 @@
   "estimated_hours": 2,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "done",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -126,7 +126,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -137,7 +137,7 @@
   "estimated_hours": 2,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -159,7 +159,7 @@
   "estimated_hours": 2,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "done",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -192,7 +192,7 @@
   "estimated_hours": 2,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -203,7 +203,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -225,7 +225,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "done",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -258,7 +258,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -269,7 +269,7 @@
   "estimated_hours": 2,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -313,7 +313,7 @@
   "estimated_hours": 1,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "doing",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }
@@ -324,7 +324,7 @@
   "estimated_hours": 2,
   "start_time": "some datetime format",
   "end_time": "some datetime format",
-  "status": "done",
+  "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
 }

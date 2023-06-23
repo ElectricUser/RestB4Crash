@@ -4,21 +4,23 @@ import datetime
 
 Broker = 'broker.emqx.io'
 PORT = 1883
-TOPIC = "/sensors/1"
+TOPIC = "/sensors/3"
 CLIENT_ID = f'python-mqtt-1'
+
+
 # username = 'emqx'
 # password = 'public'
 
 
 def on_connect(client, userdata, flags, rc):
-    print("Connected with result code "+str(rc))
+    print("Connected with result code " + str(rc))
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
     client.subscribe("/sensors/1")
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
+    print(msg.topic + " " + str(msg.payload))
 
 
 def publish(client):
@@ -46,7 +48,10 @@ def run():
     client.connect(Broker, PORT)
 
     while True:
-        message = str("force 19 pos 34")
+        # message = str("force 19 pos 34")
+        message = "F1:1040 F2:1397 M:0, F1:1051 F2:1408 M:0, F1:1031 F2:1351 M:0, " \
+                  "F1:1039 F2:1407 M:0, F1:976 F2:1344 M:0, F1:1046 F2:1419 M:0, F1:1040 " \
+                  "F2:1409 M:0, F1:1058 F2:1415 M:0, F1:1038 F2:1362 M:0, F1:993 F2:1328 M:0"
         client.publish(TOPIC, message)
 
 

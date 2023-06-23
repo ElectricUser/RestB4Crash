@@ -5,7 +5,7 @@ import time
 
 BROKER = 'broker.emqx.io'
 PORT = 1883
-TOPIC = "/sensors/1"
+TOPIC = "/sensors/3"
 CLIENT_ID = f'python-mqtt-3'
 # username = 'emqx'
 # password = 'public'
@@ -20,6 +20,9 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload) + 'received at: ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    """f = open("valor_sensores.txt", "a")
+    f.write(msg.payload.decode("utf-8") + "\n")
+    f.close()"""
 
 
 def run():

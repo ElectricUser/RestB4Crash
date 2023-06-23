@@ -7,7 +7,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task2",
@@ -17,7 +19,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task4",
@@ -27,7 +31,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task1",
@@ -37,7 +43,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task5",
@@ -47,7 +55,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task6",
@@ -57,7 +67,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent@lightwitch.org"
+    "user": "meiaagent@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task10",
@@ -67,7 +79,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task8",
@@ -77,7 +91,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task11",
@@ -87,7 +103,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task9",
@@ -97,7 +115,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task12",
@@ -107,7 +127,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task7",
@@ -117,7 +139,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent3@lightwitch.org"
+    "user": "meiaagent3@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task16",
@@ -127,7 +151,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task13",
@@ -137,7 +163,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task14",
@@ -147,7 +175,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task15",
@@ -157,7 +187,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task17",
@@ -167,7 +199,9 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   },
   {
     "title": "task19",
@@ -177,6 +211,8 @@
     "start_time": "",
     "end_time": "",
     "status": "todo",
-    "user": "meiaagent5@lightwitch.org"
+    "user": "meiaagent5@lightwitch.org",
+    "n_pauses": 0,
+    "n_stress": 0
   }
 ]
