@@ -233,6 +233,7 @@ def pause_task(request):
         # Create a new pause entry with the current time as the start time
         current_time = timezone.now().astimezone(timezone.get_current_timezone())
         pause = TaskPause.objects.create(task_id=task.id, pause_start=current_time)
+        task.n_pauses = task.n_pauses + 1
         task.status = 'paused'
         task.save()
 
