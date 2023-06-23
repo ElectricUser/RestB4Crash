@@ -8,7 +8,8 @@ The database used in this challenge is MongoDB. To use the database, you need to
 
 1. Install MongoDB Compass: https://www.mongodb.com/try/download/compass
 2. Make a connection with the database
-    1. String connection: mongodb+srv://grupo3meia:Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority
+    1. String connection: mongodb+srv://grupo3meia:
+       Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority
 
 ## Agents
 
@@ -38,13 +39,16 @@ To start the web interface run the following command inside the webinterface dir
 
 1. ```python manage.py runserver```
 
-To be able to reassign tasks it is required to start the reassignTasksEndpoint. For that the following dependencies are needed:
+To be able to reassign tasks it is required to start the reassignTasksEndpoint. For that the following dependencies are
+needed:
 
 1. ```pip install Flask```
 2. ```pip install flask-cors```
+3. ```pip install requests ```
 
 ## Initial Measures
 
-To be abble to run the MeasureInitialValues.py file, you have to install pymongo, so that the data can be updated in the database
+To be abble to run the MeasureInitialValues.py file, you have to install pymongo, so that the data can be updated in the
+database
 
 1. ```pip install pymongo```
