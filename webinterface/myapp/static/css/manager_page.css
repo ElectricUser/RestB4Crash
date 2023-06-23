@@ -1,5 +1,5 @@
 .table-container {
-    width: 50%;
+    width: 85%;
     margin: 20px auto;
 }
 
@@ -18,6 +18,9 @@ th {
     background-color: #f2f2f2;
 }
 
+tr {
+    height: 40px;
+}
 
 .reassign-button:hover {
     background-color: #8fd9ff;

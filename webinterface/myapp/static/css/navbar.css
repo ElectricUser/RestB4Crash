@@ -11,8 +11,7 @@ body {
 /* ~~ Top Navigation Bar ~~ */
 
 #navigation-container {
-    width: 1200px;
-    margin: 0 auto;
+    margin: 0 50px;
     height: 70px;
 }
 

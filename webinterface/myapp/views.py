@@ -92,7 +92,7 @@ def manager_page(request):
 
     context = {
         'tasks': combined_list,
-        'users': users
+        'users': users,
     }
 
     # Render the manager page with the combined list of tasks and users.
@@ -176,8 +176,8 @@ def finish_task(request):
                 task.status = 'done'
                 current_time = timezone.now().astimezone(timezone.get_current_timezone())
                 task.end_time = current_time
-                duration = task.end_time - task.start_time
-                task.duration = duration.seconds
+                duration = (task.end_time - task.start_time)
+                task.duration = duration.seconds - task.pause_duration
                 task.save()
 
                 # Assuming task is the model instance containing an ObjectId field
@@ -206,11 +206,14 @@ def update_task_pause_duration(request):
         # Update the task status to 'doing' and set the start time.
         task.pause_duration = duration
         task.save()
+        # Assuming task is the model instance containing an ObjectId field
+        task_dict = model_to_dict(task)
+
+        # Convert the ObjectId field to a string representation
+        task_dict['_id'] = str(task_dict['_id'])
 
         # Return a JSON response indicating success or failure
-        response_data = {'status': 'success'}
-        return JsonResponse(response_data)
-
+        return JsonResponse({'success': True, 'task': task_dict})
     # Return an error response if the request method is not POST
     response_data = {'status': 'error', 'message': 'Invalid request method'}
     return JsonResponse(response_data, status=400)
