@@ -1,9 +1,13 @@
+import json
+
+from django.forms import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from bson import ObjectId
+from datetime import datetime
+from myapp.models import Tasks, Users, AssignedTasks, TaskPause
 from django.utils import timezone
-from myapp.models import Tasks, Users, AssignedTasks
 
 
 # Login page view request.
@@ -50,9 +54,18 @@ def employee_page(request):
     # Get all the users.
     users = Users.objects.all()
 
+    tasks_json = []
+    for task in assigned_tasks:
+        new_task = model_to_dict(task)
+        new_task['_id'] = str(new_task['_id'])
+        new_task['start_time'] = new_task['start_time'].isoformat() if new_task['start_time'] is not None else None
+        new_task['end_time'] = new_task['end_time'].isoformat() if new_task['end_time'] is not None else None
+        tasks_json.append(new_task)
+
     context = {
         'assignedTasks': assigned_tasks,
-        'users': users
+        'users': users,
+        'assignedTasksJson': json.dumps(tasks_json)
     }
 
     # Render the employee page with the assigned tasks and users.
@@ -79,7 +92,7 @@ def manager_page(request):
 
     context = {
         'tasks': combined_list,
-        'users': users
+        'users': users,
     }
 
     # Render the manager page with the combined list of tasks and users.
@@ -132,10 +145,17 @@ def start_task(request):
 
             # Update the task status to 'doing' and set the start time.
             task.status = 'doing'
-            task.start_time = timezone.now()
+            current_time = timezone.now().astimezone(timezone.get_current_timezone())
+            task.start_time = current_time
             task.save()
 
-            return JsonResponse({'success': True})
+            # Assuming task is the model instance containing an ObjectId field
+            task_dict = model_to_dict(task)
+
+            # Convert the ObjectId field to a string representation
+            task_dict['_id'] = str(task_dict['_id'])
+
+            return JsonResponse({'success': True, 'task': task_dict})
         except Tasks.DoesNotExist:
             return JsonResponse({'success': False, 'message': 'Task not found'})
 
@@ -154,13 +174,114 @@ def finish_task(request):
             if task.status == 'doing':
                 # Update the task status to 'done' and set the end time
                 task.status = 'done'
-                task.end_time = timezone.now()
+                current_time = timezone.now().astimezone(timezone.get_current_timezone())
+                task.end_time = current_time
+                duration = (task.end_time - task.start_time)
+                task.duration = duration.seconds - task.pause_duration
                 task.save()
 
-                return HttpResponse(status=200)  # Task status updated successfully
+                # Assuming task is the model instance containing an ObjectId field
+                task_dict = model_to_dict(task)
+
+                # Convert the ObjectId field to a string representation
+                task_dict['_id'] = str(task_dict['_id'])
+
+                # Return the updated task object as JSON response.
+                return JsonResponse({'success': True, 'task': task_dict})
             else:
                 return HttpResponse(status=400)  # Task is not in 'doing' status
         except Tasks.DoesNotExist:
             return HttpResponse(status=404)  # Task not found
     else:
         return HttpResponse(status=405)  # Invalid request method
+
+
+def update_task_pause_duration(request):
+    if request.method == 'POST':
+        task_id = request.POST.get('task_id')
+        duration = request.POST.get('duration')
+
+        task = AssignedTasks.objects.get(_id=ObjectId(task_id))
+
+        # Update the task status to 'doing' and set the start time.
+        task.pause_duration = duration
+        task.save()
+        # Assuming task is the model instance containing an ObjectId field
+        task_dict = model_to_dict(task)
+
+        # Convert the ObjectId field to a string representation
+        task_dict['_id'] = str(task_dict['_id'])
+
+        # Return a JSON response indicating success or failure
+        return JsonResponse({'success': True, 'task': task_dict})
+    # Return an error response if the request method is not POST
+    response_data = {'status': 'error', 'message': 'Invalid request method'}
+    return JsonResponse(response_data, status=400)
+
+
+def pause_task(request):
+    if request.method == 'POST':
+        task_id = request.POST.get('task_id')
+        task = get_object_or_404(AssignedTasks, _id=ObjectId(task_id))
+
+        if task.status != 'doing':
+            return JsonResponse({'message': 'Task is not in progress.'}, status=400)
+
+        # Create a new pause entry with the current time as the start time
+        current_time = timezone.now().astimezone(timezone.get_current_timezone())
+        pause = TaskPause.objects.create(task_id=task.id, pause_start=current_time)
+        task.status = 'paused'
+        task.save()
+
+        # Assuming task is the model instance containing an ObjectId field
+        task_dict = model_to_dict(task)
+        # Convert the ObjectId field to a string representation
+        task_dict['_id'] = str(task_dict['_id'])
+
+        # Assuming task is the model instance containing an ObjectId field
+        task_pause_dict = model_to_dict(pause)
+        # Convert the ObjectId field to a string representation
+        task_pause_dict['_id'] = str(task_pause_dict['_id'])
+        task_pause_dict['task_id'] = str(task_pause_dict['task_id'])
+
+        # Return the task and task pause objects in the JSON response
+        return JsonResponse({'message': 'Task paused successfully.', 'task': task_dict, 'pause': task_pause_dict},
+                            status=200)
+
+    return JsonResponse({'message': 'Invalid request method.'}, status=405)
+
+
+def continue_task(request):
+    if request.method == 'POST':
+        task_id = request.POST.get('task_id')
+        task = get_object_or_404(AssignedTasks, _id=ObjectId(task_id))
+
+        if task.status != 'paused':
+            return JsonResponse({'message': 'Task is not paused.'}, status=400)
+
+        # Retrieve the most recent pause for the task
+        pause = TaskPause.objects.filter(task_id=task.id).order_by('-pause_start').first()
+
+        if pause:
+            # Set the end time for the pause to resume the task
+            pause.pause_end = timezone.now().astimezone(timezone.get_current_timezone())
+            pause.duration = (pause.pause_end - pause.pause_start).seconds
+            pause.save()
+            task.status = 'doing'
+            task.save()
+
+            # Assuming task is the model instance containing an ObjectId field
+            task_dict = model_to_dict(task)
+            # Convert the ObjectId field to a string representation
+            task_dict['_id'] = str(task_dict['_id'])
+
+            # Assuming task is the model instance containing an ObjectId field
+            task_pause_dict = model_to_dict(pause)
+            # Convert the ObjectId field to a string representation
+            task_pause_dict['_id'] = str(task_pause_dict['_id'])
+
+            # Return the task and pause objects in the JSON response
+            return JsonResponse({'message': 'Task resumed successfully.', 'task': task_dict, 'pause': task_pause_dict},
+                                status=200)
+
+    return JsonResponse({'message': 'Invalid request method.'}, status=405)

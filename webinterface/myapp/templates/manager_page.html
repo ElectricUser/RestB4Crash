@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,10 +7,20 @@
     <title>Employees Table</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/manager_page.css' %}">
     {% include 'navbar.html' %}
+
+    <script>
+        let selectedLogin = localStorage.getItem("selectedLogin");
+        selectedLogin = selectedLogin.split("@")[0]
+        selectedLogin = selectedLogin.charAt(0).toUpperCase() + selectedLogin.slice(1)
+        window.onload = function () {
+            let greeting = document.getElementById("greeting");
+            greeting.innerText = `Hello ${selectedLogin}, view your employee's tasks here.`;
+        };
+    </script>
 </head>
 <body>
 <div class="table-container">
-    <h1>Team Name</h1>
+    <h2 id="greeting"></h2>
     <div class="tooltip">
         <button class="reassign-button">Reassign Tasks</button>
         <span class="tooltiptext">Rearrange the tasks between employees for better performance</span>
@@ -18,9 +29,11 @@
         <thead>
         <tr>
             <th>User</th>
-            <th>Task Title</th>
-            <th>Task Description</th>
-            <th>Task Status</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Pauses</th>
+            <th>Stress</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -29,8 +42,9 @@
                 <td>{{ task.user }}</td>
                 <td>{{ task.title.capitalize }}</td>
                 <td>{{ task.description.capitalize }}</td>
-                <td><span class="label {{ task.status|lower }}">{{ task.status.capitalize }}</span>
-                </td>
+                <td>{{ task.n_pauses | default_value }}</td>
+                <td>{{ task.n_stress| default_value }}</td>
+                <td><span class="label {{ task.status|lower }}">{{ task.status.capitalize }}</span></td>
             </tr>
         {% endfor %}
         </tbody>

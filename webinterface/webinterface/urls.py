@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from myapp.views import login, login_page, logout, contact, start_task, finish_task, employee_page, manager_page
+from myapp.views import login, login_page, logout, contact, start_task, finish_task, employee_page, manager_page, \
+    pause_task, continue_task, update_task_pause_duration
 
 urlpatterns = [
     path('', login_page, name='login_page'),
@@ -25,6 +26,9 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('start_task/', start_task, name='start_task'),
     path('finish_task/', finish_task, name='finish_task'),
+    path('pause_task/', pause_task, name='pause_task'),
+    path('update_task_pause_duration/', update_task_pause_duration, name='update_task_pause_duration'),
+    path('continue_task/', continue_task, name='continue_task'),
     path('employee_page/', employee_page, name='employee_page'),
     path('manager_page/', manager_page, name='manager_page'),
 ]
