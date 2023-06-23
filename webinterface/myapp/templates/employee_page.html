@@ -351,13 +351,13 @@
     function completionMessage() {
         tasks.forEach(function (task) {
             let taskId = task._id;
-            let completionMessage = task.completionMessage;
             let status = task.status;
 
             if (status.toLowerCase() === "done") {
                 task.completionMessage = "Completed in: " + getTimeTaken(task.duration) + ". Estimated Time: " + task.estimated_hours + "h";
             }
 
+            let completionMessage = task.completionMessage;
             if (completionMessage && status && status.toLowerCase() === 'done') {
                 let completionMessageElement = document.createElement('p');
                 completionMessageElement.textContent = completionMessage;

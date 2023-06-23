@@ -7,22 +7,12 @@
     <title>Employees Table</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/manager_page.css' %}">
     {% include 'navbar.html' %}
-
-    <script>
-        let selectedLogin = localStorage.getItem("selectedLogin");
-        selectedLogin = selectedLogin.split("@")[0]
-        selectedLogin = selectedLogin.charAt(0).toUpperCase() + selectedLogin.slice(1)
-        window.onload = function () {
-            let greeting = document.getElementById("greeting");
-            greeting.innerText = `Hello ${selectedLogin}, view your employee's tasks here.`;
-        };
-    </script>
 </head>
 <body>
 <div class="table-container">
     <h2 id="greeting"></h2>
     <div class="tooltip">
-        <button class="reassign-button">Reassign Tasks</button>
+        <button class="reassign-button" onclick="reassign_tasks()">Reassign Tasks</button>
         <span class="tooltiptext">Rearrange the tasks between employees for better performance</span>
     </div>
     <table>
@@ -51,4 +41,26 @@
     </table>
 </div>
 </body>
+<script>
+    let selectedLogin = localStorage.getItem("selectedLogin");
+    selectedLogin = selectedLogin.split("@")[0]
+    selectedLogin = selectedLogin.charAt(0).toUpperCase() + selectedLogin.slice(1)
+    window.onload = function () {
+        let greeting = document.getElementById("greeting");
+        greeting.innerText = `Hello ${selectedLogin}, view your employee's tasks here.`;
+    };
+
+    function reassign_tasks() {
+        fetch('http://localhost:5000/reassignTasks')
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data
+                console.log(data);
+            })
+            .catch(error => {
+                // Handle the error
+                console.log(error);
+            });
+    }
+</script>
 </html>

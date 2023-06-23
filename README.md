@@ -38,6 +38,11 @@ To start the web interface run the following command inside the webinterface dir
 
 1. ```python manage.py runserver```
 
+To be able to reassign tasks it is required to start the reassignTasksEndpoint. For that the following dependencies are needed:
+
+1. ```pip install Flask```
+2. ```pip install flask-cors```
+
 ## Initial Measures
 
 To be abble to run the MeasureInitialValues.py file, you have to install pymongo, so that the data can be updated in the database
