@@ -8,7 +8,7 @@ import asyncio
 
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-
+import math
 """
 # Send a ping to confirm a successful connection
 try:
@@ -76,17 +76,26 @@ def calculateUserTommorrowWork (users):
                 
         todays_task = users[user]
         
-        hours_todo, difficulty_todo = 0, 0
+        hours_todo, difficulty_todo, n_pauses, n_stress = 0, 0, 0, 0
         for task in todays_task:
             hours_todo      += int(task['estimated_hours'])
             difficulty_todo += int(task['difficulty'])
-            
+            # check if task has pauses and stress
+            try:
+                n_pauses        += int(task['n_pauses'])
+            except:
+                pass
+            try:
+                n_stress        += int(task['n_stress'])
+            except:
+                pass
+
         usersTaskInfo[user] = ({
             "user": user,
             "hours_todo": hours_todo,
             "difficulty_todo": difficulty_todo,
             "hours_todo_tommorrow": 8 - hours_todo if 8 - hours_todo > 0 else 0,
-            "difficulty_todo_tommorrow" : 15 - difficulty_todo if 15 - difficulty_todo > 0 else 0
+            "difficulty_todo_tommorrow" : 15 - difficulty_todo - getConversion(n_stress, n_pauses) if 15 - difficulty_todo - getConversion(n_stress, n_pauses) > 0 else 0
         })
         
         # """ Tommorrow Stats
@@ -100,6 +109,15 @@ def calculateUserTommorrowWork (users):
         """
         # """
     return usersTaskInfo
+
+def getConversion(n_stress, n_pauses):
+    x = n_stress - n_pauses  # Compute the difference between stress and pauses
+    sigmoid_value = 1 / (1 + math.exp(-x))  # Apply sigmoid function
+
+    # Scale the sigmoid value to the range -2 to 2
+    scaled_value = round(sigmoid_value * 4) - 2
+
+    return scaled_value
 
 def sortUsers(users, usersTaskInfo, debug = False):
     """
@@ -254,6 +272,29 @@ def dupData():
     for document in collectionTask.find():
         collectionRBATask.insert_one(document)
     
+def distributeTask():
+    tasks, assignedTask, users = getData()
+    
+    # Gets the users
+    # Remove this task and Store in the DB as "Historic Task"
+    users, task2Remove = calculateUserTodaysWork(users)
+    
+    # Gets User availably for tommorrow
+    usersTaskInfo = calculateUserTommorrowWork(users)
+    
+    # These are task in the queu that were assigned to the user
+    # 1. Remove the task from DB "Task"
+    # 2. Update Assigned task whit these "Task"
+    task_added, tasks, usersTaskInfo = distributeTaskTommorrow(users, usersTaskInfo, tasks)
+            
+    """ Mongo DB Operations """
+    # dupData()
+
+    # # Delete and create a record in "Historic Task"
+    # storeHistoricTask(task2Remove)
+    
+    # # Delete and create a record in "Assigned Task"
+    # storeAssignedTask(formatAddedTask(task_added))
 
 if __name__ == "__main__":
     tasks, assignedTask, users = getData()
@@ -269,21 +310,15 @@ if __name__ == "__main__":
     # 1. Remove the task from DB "Task"
     # 2. Update Assigned task whit these "Task"
     task_added, tasks, usersTaskInfo = distributeTaskTommorrow(users, usersTaskInfo, tasks)
-    
-    if (1 == 0):
-        print("\n\nPriting Agenda\n")
-        for user in usersTaskInfo:
-            userTaskInfo = usersTaskInfo.get(user)
-            showUserAgenda(userTaskInfo, user)
-            
-    """ Mongo DB Operations """
-    dupData()
 
-    # Delete and create a record in "Historic Task"
-    storeHistoricTask(task2Remove)
+    """ Mongo DB Operations """
+    # dupData()
+
+    # # Delete and create a record in "Historic Task"
+    # storeHistoricTask(task2Remove)
     
-    # Delete and create a record in "Assigned Task"
-    storeAssignedTask(formatAddedTask(task_added))
+    # # Delete and create a record in "Assigned Task"
+    # storeAssignedTask(formatAddedTask(task_added))
 
 
 
