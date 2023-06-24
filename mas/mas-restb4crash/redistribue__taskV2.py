@@ -211,14 +211,14 @@ def storeHistoricTask (tasks):
 
     DB = client['grupo3meia']
 
-    collection = DB['RBA_Historic_Task']
+    collection = DB['Historic_Task']
 
     for task in tasks:
         collection.insert_one(task)
 
     # Delete tasks from DB
     # Deleting the collection the tasks are in
-    collection = DB['RBA_AssignTask']
+    collection = DB['AssignTask']
     for task in tasks:
         collection.delete_one(task)
 
@@ -229,14 +229,14 @@ def storeAssignedTask (tasks):
 
     DB = client['grupo3meia']
 
-    collection = DB['RBA_AssignTask']
+    collection = DB['AssignTask']
 
     for task in tasks:
         collection.insert_one(task)
     
     # Delete tasks from DB
     # Deleting the collection the tasks are in
-    collection = DB['RBA_Task']
+    collection = DB['Task']
 
     for task in tasks:
         collection.delete_one(task)
@@ -291,10 +291,10 @@ def distributeTask():
     # dupData()
 
     # # Delete and create a record in "Historic Task"
-    # storeHistoricTask(task2Remove)
+    storeHistoricTask(task2Remove)
     
     # # Delete and create a record in "Assigned Task"
-    # storeAssignedTask(formatAddedTask(task_added))
+    storeAssignedTask(formatAddedTask(task_added))
 
 if __name__ == "__main__":
     tasks, assignedTask, users = getData()
