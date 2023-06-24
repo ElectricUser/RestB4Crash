@@ -1,7 +1,8 @@
 from spade.agent import Agent
 from spade.behaviour import OneShotBehaviour, CyclicBehaviour
 from spade.template import Template
-from BD.bd import add_stress
+from BD.bd import add_stress, add_pause, get_user_avg_force
+from utils import has_paused, has_stressed
 
 
 class EmployeeAgent(Agent):
@@ -22,13 +23,33 @@ class EmployeeAgent(Agent):
         async def run(self):
             print("ReceiveSensorVals running")
             msg = await self.receive(timeout=28800)
+            print(f'Sensor values {msg.body} from {msg.sender}')
 
-            if int(msg.body) >= 20:
+            await add_stress(str(self.agent.jid))
+            if msg:
+                sensor_vals = str(msg.body).split(",")
+                F1s = []
+                F2s = []
+                Ms = []
+                for x in sensor_vals:
+                    F1s.append(int(x.split(":")[1].split()[0]))
+                    F2s.append(int(x.split()[1].split(":")[1].split()[0].split(":")[0]))
+                    Ms.append(int(x.split()[2].split(":")[1]))
+                print("F1s:", F1s)
+                print("F2s:", F2s)
+                print("Ms:", Ms)
+                if has_paused(Ms, F1s, F2s):
+                    await add_pause(str(self.agent.jid))
+                avg_force = await get_user_avg_force(str(self.agent.jid))
+                if avg_force and has_stressed(F1s, avg_force):
+                    await add_stress(str(self.agent.jid))
+
+            """if int(msg.body) >= 20:
                 print(f'Sensor values {msg.body} from {msg.sender}')
                 await add_stress(str(self.agent.jid))
             else:
                 print("Message not received")
-                self.kill()
+                self.kill()"""
 
     async def setup(self):
         print(f"Employee {self.jid} started")

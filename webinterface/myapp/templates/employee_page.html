@@ -6,7 +6,7 @@
 <head>
     <title>Employee Tasks</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/employee_page.css' %}">
-    {% include 'navbar.html' %}
+    {% include 'navbar.html' %}  <!-- Including the navigation bar -->
 </head>
 <body>
 <div class="table-container">
@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for assignedTask in assignedTasks %}
+        {% for assignedTask in assignedTasks %} <!-- Looping through assigned tasks -->
             <tr>
                 <td>{{ assignedTask.title.capitalize }}</td>
                 <td class="estimated-hours">{{ assignedTask.estimated_hours }} h</td>
@@ -78,8 +78,11 @@
 </div>
 
 <script>
+    // Retrieve assigned tasks data from JSON and parse it
     let tasks = JSON.parse('{{ assignedTasksJson | safe}}');
     console.log(tasks)
+    console.log(tasks)
+    // Call the refreshPage function to initialize the page
     refreshPage();
 
     function startTask(taskId) {
@@ -189,11 +192,9 @@
 
                 tasks = tasks.map(task => task._id === assignedTask._id ? assignedTask : task);
 
-                postNewTaskDuration(taskId, assignedTask.pause_duration + taskPause.duration);
-
-                startCountdown(taskId); // Start the countdown clock.
-
                 disableAllStartButtons();
+
+                postNewTaskDuration(taskId, assignedTask.pause_duration + taskPause.duration);
 
                 // Refresh the page.
                 location.reload();
@@ -217,8 +218,13 @@
         xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
         xhr.onload = function () {
             if (xhr.status === 200) {
-                // Task duration updated successfully.
-                console.log("Task duration updated successfully.");
+                // Update the tasks object when continuing a task.
+                let assignedTask = createAssignedTask(JSON.parse(xhr.response).task);
+
+                tasks = tasks.map(task => task._id === assignedTask._id ? assignedTask : task);
+
+                // Start the countdown clock.
+                startCountdown(taskId);
 
                 // Refresh the page.
                 location.reload();
@@ -274,25 +280,29 @@
 
         if (countdownElement && status) {
             let countDownDate = new Date(startTime);
-            countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000) + pause_duration); // Convert estimated hours to milliseconds.
+            countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000) + (pause_duration * 1000)); // Convert estimated hours to milliseconds.
 
             if (status.toLowerCase() === "paused") {
                 let countDownDate = new Date(startTime);
-                countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000) + pause_duration); // Convert estimated hours to milliseconds.
+                countDownDate.setTime(countDownDate.getTime() + (estimatedHours * 60 * 60 * 1000) + (pause_duration * 1000)); // Convert estimated hours to milliseconds.
 
                 let now = new Date().getTime();
                 let distance = countDownDate - now;
 
-                countdownElement.innerHTML = formatTime(distance);
-            }
-
-            let countdownInterval = setInterval(function () {
-                let now = new Date().getTime();
-                let distance = countDownDate - now;
 
                 if (distance <= 0) {
-                    clearInterval(countdownInterval);
-                    countdownElement.innerHTML = "Time's up!";
+                    countdownElement.innerHTML = "Extra Time: " + formatTime(Math.abs(distance));
+                } else {
+                    countdownElement.innerHTML = formatTime(distance);
+                }
+            }
+
+            setInterval(function () {
+                let now = new Date().getTime();
+                let distance = countDownDate - now;
+
+                if (distance <= 0 && status.toLowerCase() !== "paused") {
+                    countdownElement.innerHTML = "Extra Time: " + formatTime(Math.abs(distance));
                 } else if (status.toLowerCase() !== 'paused') {
                     countdownElement.innerHTML = formatTime(distance);
                 }
@@ -341,13 +351,13 @@
     function completionMessage() {
         tasks.forEach(function (task) {
             let taskId = task._id;
-            let completionMessage = task.completionMessage;
             let status = task.status;
 
             if (status.toLowerCase() === "done") {
                 task.completionMessage = "Completed in: " + getTimeTaken(task.duration) + ". Estimated Time: " + task.estimated_hours + "h";
             }
 
+            let completionMessage = task.completionMessage;
             if (completionMessage && status && status.toLowerCase() === 'done') {
                 let completionMessageElement = document.createElement('p');
                 completionMessageElement.textContent = completionMessage;

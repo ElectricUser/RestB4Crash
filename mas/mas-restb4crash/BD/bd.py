@@ -18,6 +18,7 @@ except Exception as e:
 DB = client['grupo3meia']
 TASKS = DB['Task']
 ASSIGNED_TASKS = DB['AssignedTasks']
+USERS = DB['Users']
 
 
 async def fetch_n_tasks_for_8h():
@@ -78,8 +79,6 @@ async def ask_tasks(agent_jid):
         return False
 
 
-# final_example = asyncio.run(ask_tasks("meiaagent1@lightwitch.org"))
-
 # Delete all tasks from db
 def clean_db():
     DB['AssignedTasks'].delete_many({})
@@ -90,17 +89,34 @@ def clean_db():
 
 
 async def add_stress(agent_jid):
-    # find task ebing done at the moment
+    # find task being done at the moment
     doing_task = ASSIGNED_TASKS.find_one({"user": agent_jid, "status": "doing"})
 
-    # check if task has n_stress attribute
-    n_field_task = ASSIGNED_TASKS.find_one({"user": agent_jid, "status": "doing", "n_stress": { "$exists": "true" }})
-
-    if n_field_task:
-        n_stress = n_field_task['n_stress']
+    if doing_task:
+        n_stress = doing_task['n_stress']
         n_stress += 1
         ASSIGNED_TASKS.update_one(doing_task, {"$set": {"n_stress": n_stress}})
     else:
-        ASSIGNED_TASKS.update_one(doing_task, {"$set": {"n_stress": 1}})
+        return
 
-# example = asyncio.run(add_stress("meiaagent@lightwitch.org"))
+
+async def add_pause(agent_jid):
+    # find task being done at the moment
+    doing_task = ASSIGNED_TASKS.find_one({"user": agent_jid, "status": "doing"})
+
+    if doing_task:
+        n_pauses = doing_task['n_pauses']
+        n_pauses += 1
+        ASSIGNED_TASKS.update_one(doing_task, {"$set": {"n_pauses": n_pauses}})
+    else:
+        return
+
+
+async def get_user_avg_force(agent_jid):
+    try:
+        usr = USERS.find_one({"username": agent_jid})
+        usr_avg_force = usr['avg_force']
+    except Exception as e:
+        print("There was an error: ", e)
+        return False
+    return usr_avg_force
