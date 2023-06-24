@@ -218,7 +218,7 @@ def storeHistoricTask (tasks):
 
     # Delete tasks from DB
     # Deleting the collection the tasks are in
-    collection = DB['AssignTask']
+    collection = DB['AssignedTasks']
     for task in tasks:
         collection.delete_one(task)
 
@@ -229,7 +229,7 @@ def storeAssignedTask (tasks):
 
     DB = client['grupo3meia']
 
-    collection = DB['AssignTask']
+    collection = DB['AssignedTasks']
 
     for task in tasks:
         collection.insert_one(task)
