@@ -221,6 +221,7 @@ def storeHistoricTask (tasks):
     collection = DB['AssignedTasks']
     for task in tasks:
         collection.delete_one(task)
+        
 
 def storeAssignedTask (tasks):
     uri = "mongodb+srv://grupo3meia:Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority"
@@ -228,8 +229,15 @@ def storeAssignedTask (tasks):
     client = MongoClient(uri, server_api=ServerApi('1'))
 
     DB = client['grupo3meia']
-
+ 
     collection = DB['NextDayTasks']
+    """ Dup data """
+    collection2 = DB['AssignedTasks']
+
+    for document in collection2.find():
+        collection.insert_one(document)
+    
+    """ End dup data """
 
     for task in tasks:
         collection.insert_one(task)
@@ -240,6 +248,11 @@ def storeAssignedTask (tasks):
 
     for task in tasks:
         collection.delete_one(task)
+        
+    ## delete assigned task
+    collection = DB['AssignedTasks']        
+    collection.delete_many({})
+    
 
 def formatAddedTask (task_added):
     task_added_copy = []
@@ -297,19 +310,20 @@ def distributeTask():
     storeAssignedTask(formatAddedTask(task_added))
 
 if __name__ == "__main__":
-    tasks, assignedTask, users = getData()
+    distributeTask()
+    # tasks, assignedTask, users = getData()
     
-    # Gets the users
-    # Remove this task and Store in the DB as "Historic Task"
-    users, task2Remove = calculateUserTodaysWork(users)
+    # # Gets the users
+    # # Remove this task and Store in the DB as "Historic Task"
+    # users, task2Remove = calculateUserTodaysWork(users)
     
-    # Gets User availably for tommorrow
-    usersTaskInfo = calculateUserTommorrowWork(users)
+    # # Gets User availably for tommorrow
+    # usersTaskInfo = calculateUserTommorrowWork(users)
     
-    # These are task in the queu that were assigned to the user
-    # 1. Remove the task from DB "Task"
-    # 2. Update Assigned task whit these "Task"
-    task_added, tasks, usersTaskInfo = distributeTaskTommorrow(users, usersTaskInfo, tasks)
+    # # These are task in the queu that were assigned to the user
+    # # 1. Remove the task from DB "Task"
+    # # 2. Update Assigned task whit these "Task"
+    # task_added, tasks, usersTaskInfo = distributeTaskTommorrow(users, usersTaskInfo, tasks)
 
     """ Mongo DB Operations """
     # dupData()
