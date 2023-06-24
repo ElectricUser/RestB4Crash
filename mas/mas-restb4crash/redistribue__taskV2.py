@@ -229,7 +229,7 @@ def storeAssignedTask (tasks):
 
     DB = client['grupo3meia']
 
-    collection = DB['AssignedTasks']
+    collection = DB['NextDayTasks']
 
     for task in tasks:
         collection.insert_one(task)
