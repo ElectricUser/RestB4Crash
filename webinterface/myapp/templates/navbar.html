@@ -35,7 +35,7 @@
             if (xhr.status === 200) {
                 // Authentication successful, redirect to manager page.
                 window.location.href = "/login";
-                localStorage.removeItem("selectedLogin")
+                // localStorage.removeItem("selectedLogin");
             } else {
                 // Authentication failed, handle error.
                 console.log("Logout failed");
@@ -54,10 +54,10 @@
     // Check if localStorage_selectedLogin is not null and update the visibility of the logout link.
     if (localStorage_selectedLogin && window.location.pathname !== "/login/" && window.location.pathname !== "/" && window.location.pathname !== "/logout/") {
         if (logoutLink) {
-            logoutLink.style.visibility = 'visible'
+            logoutLink.style.visibility = 'visible';
         }
     } else {
-        logoutLink.style.visibility = 'hidden'
+        logoutLink.style.visibility = 'hidden';
     }
 </script>
 </body>

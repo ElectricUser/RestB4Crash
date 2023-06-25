@@ -95,7 +95,7 @@ tr {
     color: #ff0000; /* Red */
 }
 
-.doing {
+.doing, .paused {
     color: #f1e20f; /* Green */
 }
 

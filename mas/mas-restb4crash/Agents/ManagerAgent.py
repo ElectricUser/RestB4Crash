@@ -1,8 +1,8 @@
 from spade.message import Message
 from spade.agent import Agent
-from spade.behaviour import OneShotBehaviour, PeriodicBehaviour
-from credentials import *
-from BD.bd import ask_tasks, assign_next_day_tasks, assigned_tasks
+from spade.behaviour import PeriodicBehaviour
+from config.credentials import *
+from BD.bd import ask_tasks, assign_next_day_tasks
 
 
 class ManagerAgent(Agent):

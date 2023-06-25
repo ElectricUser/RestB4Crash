@@ -1,6 +1,5 @@
 from paho.mqtt import client as mqtt
 import time
-import datetime
 
 Broker = 'broker.emqx.io'
 PORT = 1883

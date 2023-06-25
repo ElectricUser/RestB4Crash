@@ -1,19 +1,5 @@
-import asyncio
-
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-from redistribue__taskV2 import distributeTask
-
-uri = "mongodb+srv://grupo3meia:Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority"
-
-client = MongoClient(uri, server_api=ServerApi('1'))
-
-DB = client['grupo3meia']
-TASKS = DB['Task']
-ASSIGNED_TASKS = DB['AssignedTasks']
-USERS = DB['Users']
-NEXT_DAY_TASKS = DB['NextDayTasks']
-HIST_TASKS = DB['Historic_Task']
+from redistribute__taskV2 import distribute_task
+from config.database_config import *
 
 
 async def fetch_n_tasks_for_8h():
@@ -133,7 +119,7 @@ async def assigned_tasks():
 async def assign_next_day_tasks():
     try:
         # Task Scheduling Algorithm
-        dist_tasks = await distributeTask()
+        dist_tasks = await distribute_task()
         if dist_tasks:
             try:
                 next_day_tasks = NEXT_DAY_TASKS.find({})
@@ -158,6 +144,5 @@ async def is_history_tasks_empty():
         return True
     else:
         return False
-
 
 # clean_db()

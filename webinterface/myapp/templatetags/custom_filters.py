@@ -48,4 +48,4 @@ def format_duration(value):
 
 @register.filter
 def default_value(value):
-    return value if value is not None else 0
+    return value if (value is not None and value != '') else 0

@@ -1,10 +1,7 @@
-import pprint
-from datetime import datetime
 from spade.agent import Agent
 from spade.behaviour import PeriodicBehaviour
 from spade.message import Message
-from credentials import *
-from utils import has_paused
+from config.credentials import *
 
 # MQTT
 from paho.mqtt import client as mqtt

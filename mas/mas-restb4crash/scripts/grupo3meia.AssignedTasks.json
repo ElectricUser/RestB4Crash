@@ -1,6 +1,6 @@
 [
   {
-    "title": "task1-Change button 3 color 3",
+    "title": "Task 1 - Change button 3 color 3",
     "description": "Change button 3 color from blue to red",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -10,7 +10,7 @@
     "n_stress": 0
   },
   {
-    "title": "task2-Add cleaning button to shopping cart",
+    "title": "Task 2 - Add cleaning button to shopping cart",
     "description": "Add cleaning button to clean all the items in the shopping cart",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -20,7 +20,7 @@
     "n_stress": 0
   },
   {
-    "title": "task3-Send notification to user after adding items in the cart",
+    "title": "Task 3 - Send notification to user after adding items in the cart",
     "description": "Send notification to user to remember him that there are items in the shopping cart, after 30 minutes of inactivity",
     "difficulty": 4,
     "estimated_hours": 2,
@@ -30,7 +30,7 @@
     "n_stress": 0
   },
   {
-    "title": "task4-Add functionality to change cambium coin",
+    "title": "Task 4 - Add functionality to change cambium coin",
     "description": "Add functionality to change cambium coin in the top right corner of the home page",
     "difficulty": 1,
     "estimated_hours": 1,
@@ -40,7 +40,7 @@
     "n_stress": 0
   },
   {
-    "title": "task5-Research about recommendation systems",
+    "title": "Task 5 - Research about recommendation systems",
     "description": "Research about recommendation systems in the topic of fashion",
     "difficulty": 2,
     "estimated_hours": 2,
@@ -50,7 +50,7 @@
     "n_stress": 0
   },
   {
-    "title": "task6-Trace initial plan for the recommendation system",
+    "title": "Task 6 - Trace initial plan for the recommendation system",
     "description": "Trace initial plan to create a recommendation system",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -60,7 +60,7 @@
     "n_stress": 0
   },
   {
-    "title": "task7-Create client presentation",
+    "title": "Task 7 - Create client presentation",
     "description": "Create client presentation with a situation point",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -70,7 +70,7 @@
     "n_stress": 0
   },
   {
-    "title": "task8-Create initial base for the recommendation system",
+    "title": "Task 8 - Create initial base for the recommendation system",
     "description": "Create initial base for the recommendation system from the initial plan",
     "difficulty": 4,
     "estimated_hours": 2,
@@ -80,7 +80,7 @@
     "n_stress": 0
   },
   {
-    "title": "task9-Client meeting",
+    "title": "Task 9 - Client meeting",
     "description": "Meeting with the client to show situation point",
     "difficulty": 1,
     "estimated_hours": 1,
@@ -90,7 +90,7 @@
     "n_stress": 0
   },
   {
-    "title": "task10-Add information about the company in a new page",
+    "title": "Task 10 - Add information about the company in a new page",
     "description": "Add information about the company in a new page, including contacts",
     "difficulty": 2,
     "estimated_hours": 2,
@@ -100,7 +100,7 @@
     "n_stress": 0
   },
   {
-    "title": "task11-Add FAQ page",
+    "title": "Task 11 - Add FAQ page",
     "description": "Add FAQ page with top 10 questions",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -110,7 +110,7 @@
     "n_stress": 0
   },
   {
-    "title": "task12-Buy instagram handle",
+    "title": "Task 12 - Buy instagram handle",
     "description": "Buy instagram handle for grupo_3_meia",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -120,7 +120,7 @@
     "n_stress": 0
   },
   {
-    "title": "task13-Create publicity plan",
+    "title": "Task 13 - Create publicity plan",
     "description": "Create publicity plan for spring season",
     "difficulty": 4,
     "estimated_hours": 2,
@@ -130,7 +130,7 @@
     "n_stress": 0
   },
   {
-    "title": "task14-Answer client emails",
+    "title": "Task 14 - Answer client emails",
     "description": "Answer client emails",
     "difficulty": 1,
     "estimated_hours": 1,
@@ -140,7 +140,7 @@
     "n_stress": 0
   },
   {
-    "title": "task15-Try to get interview with a big fashion magazine",
+    "title": "Task 15 - Try to get interview with a big fashion magazine",
     "description": "Try to schedule meeting with a big fashion magazine",
     "difficulty": 2,
     "estimated_hours": 2,
@@ -150,7 +150,7 @@
     "n_stress": 0
   },
   {
-    "title": "task16-Order more samples for the new collection",
+    "title": "Task 16 - Order more samples for the new collection",
     "description": "Order more samples for the new collection",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -160,7 +160,7 @@
     "n_stress": 0
   },
   {
-    "title": "task17-Add button for dark mode",
+    "title": "Task 17 - Add button for dark mode",
     "description": "Add button for dark mode in the top right corner of the home page",
     "difficulty": 2,
     "estimated_hours": 1,
@@ -170,7 +170,7 @@
     "n_stress": 0
   },
   {
-    "title": "task19-Add button to create new card",
+    "title": "Task 19 - Add button to create new card",
     "description": "Add button to create new card when doing check out",
     "difficulty": 1,
     "estimated_hours": 1,

@@ -30,7 +30,7 @@
         {% for task in tasks %}
             <tr>
                 <td>{{ task.user }}</td>
-                <td>{{ task.title.capitalize }}</td>
+                <td>{{ task.title }}</td>
                 <td>{{ task.description.capitalize }}</td>
                 <td>{{ task.n_pauses | default_value }}</td>
                 <td>{{ task.n_stress| default_value }}</td>

@@ -48,7 +48,7 @@ needed:
 
 ## Initial Measures
 
-To be abble to run the MeasureInitialValues.py file, you have to install pymongo, so that the data can be updated in the
+To be able to run the MeasureInitialValues.py file, you have to install pymongo, so that the data can be updated in the
 database
 
 1. ```pip install pymongo```

@@ -25,7 +25,19 @@
 </div>
 
 <script>
-    localStorage.clear();
+    // Set the selected login in the dropdown if available
+    const selectedLogin = localStorage.getItem("selectedLogin") || null;
+    const selectedRole = localStorage.getItem("selectedRole") || "manager"; // Set a default value if not found
+    const loginDropdown = document.getElementById("login-selection");
+    const userRoleSelect = document.getElementById("user-role");
+
+    if (selectedLogin && loginDropdown) {
+        loginDropdown.value = selectedLogin;
+    }
+
+    if (selectedRole && userRoleSelect) {
+        userRoleSelect.value = selectedRole;
+    }
 
     let logins = {
         manager: [
@@ -40,7 +52,6 @@
         ]
     };
 
-    let userRoleSelect = document.getElementById("user-role");
     let loginSelect = document.getElementById("login-selection");
 
     function populateLoginSelect() {
@@ -57,6 +68,11 @@
             option.text = options[i];
             loginSelect.appendChild(option);
         }
+
+        // Set the selected option based on the stored value.
+        if (selectedLogin && selectedRole === localStorage.getItem("selectedRole")) {
+            loginSelect.value = selectedLogin;
+        }
     }
 
     function login() {
@@ -64,6 +80,7 @@
         let selectedLogin = loginSelect.value;
 
         localStorage.setItem("selectedLogin", selectedLogin);
+        localStorage.setItem("selectedRole", selectedRole);
 
         if (selectedRole === "manager") {
             // Send AJAX request to the login view URL.

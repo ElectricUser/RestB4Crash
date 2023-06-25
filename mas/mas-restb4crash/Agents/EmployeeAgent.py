@@ -1,5 +1,5 @@
 from spade.agent import Agent
-from spade.behaviour import OneShotBehaviour, CyclicBehaviour
+from spade.behaviour import CyclicBehaviour
 from spade.template import Template
 from BD.bd import add_stress, add_pause, get_user_avg_force
 from utils import has_paused, has_stressed
@@ -10,14 +10,14 @@ class EmployeeAgent(Agent):
         async def run(self):
             print("RecvBehav running")
 
-            msg = await self.receive(timeout=2880) # wait for a message for 10 seconds
+            msg = await self.receive(timeout=2880)  # wait for a message for 10 seconds
             if msg:
                 print(f"Message received on agent {self.agent.jid} with content: {msg.body}")
             else:
                 print("Did not received any message after 120 seconds")
 
             # set status occupied with task
-            self.status = "occupied" # Change with bd task query search
+            self.status = "occupied"  # Change with bd task query search
 
     class ReceiveSensorVals(CyclicBehaviour):
         async def run(self):

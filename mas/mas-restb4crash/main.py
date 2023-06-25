@@ -2,7 +2,7 @@ from Agents.ManagerAgent import ManagerAgent
 from Agents.EmployeeAgent import EmployeeAgent
 from Agents.SensorAgent import SensorAgent
 import spade
-from credentials import *
+from config.credentials import *
 
 
 async def main():

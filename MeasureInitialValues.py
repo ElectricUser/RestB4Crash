@@ -1,14 +1,15 @@
 from datetime import datetime
+from config.database_config import *
 
 import paho.mqtt.client as mqtt
-import sys
+# import sys
 # pip install pymongo
-#import cv2
-import pymongo
-#from ffpyplayer.player import MediaPlayer
+# import cv2
+# import pymongo
+# from ffpyplayer.player import MediaPlayer
 import warnings
-import numpy as np
-from sys import exit
+# import numpy as np
+# from sys import exit
 import time
 from statistics import mean
 
@@ -19,18 +20,20 @@ CLIENT_ID = f'python-mqtt-3'
 normal_values = []
 stress_values = []
 USER = 0
+
+
 # username = 'emqx'
 # password = 'public'
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
-        print("Connected to MQTT Broker!")  
+        print("Connected to MQTT Broker!")
     else:
         print("Failed to connect, return code %d\n", rc)
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload) + 'received at: ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print(msg.topic + " " + str(msg.payload) + 'received at: ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     if str(msg.payload).startswith("normal:"):
         value = int(str(msg.payload).split(":")[1].split("'")[0])
         if value > 0:
@@ -40,7 +43,8 @@ def on_message(client, userdata, msg):
         if value > 0:
             stress_values.append(value)
 
-#def PlayVideo(video_path):
+
+# def PlayVideo(video_path):
 #    video=cv2.VideoCapture(video_path)
 #    player = MediaPlayer(video_path)
 #    while True:
@@ -61,7 +65,8 @@ def on_message(client, userdata, msg):
 #    
 
 def run():
-    employees = ["meiaagent@lightwitch.org", "meiaagent1@lightwitch.org", "meiaagent2@lightwitch.org", "meiaagent3@lightwitch.org"
+    employees = ["meiaagent@lightwitch.org", "meiaagent1@lightwitch.org", "meiaagent2@lightwitch.org",
+                 "meiaagent3@lightwitch.org"
                  "meiaagent4@lightwitch.org", "meiaagent5@lightwitch.org", "meiaagent6@lightwitch.org"]
     warnings.filterwarnings("ignore")
     print("Choose the employee:")
@@ -75,43 +80,39 @@ def run():
     employee = input("Enter the number of the employee: ")
     print(employee)
     print("Now watch the video")
-    #PlayVideo('Initial Measures.mp4')
+    # PlayVideo('Initial Measures.mp4')
 
     client = mqtt.Client(CLIENT_ID)
     client.on_connect = on_connect
     client.connect(BROKER, PORT)
-    #emp = "user:"+str(employees[int(employee)-1])
-    #client.subscribe(TOPIC, emp)
+    # emp = "user:"+str(employees[int(employee)-1])
+    # client.subscribe(TOPIC, emp)
     t_end = time.time() + 80
     client.subscribe(TOPIC)
     client.loop_start()
     while time.time() < t_end:
         client.on_message = on_message
-    client.loop_stop() 
+    client.loop_stop()
     normal_value = 0
     stress_value = 0
 
-    if (len(normal_values)>0):
+    if len(normal_values) > 0:
         normal_value = mean(normal_values)
-    if (len(stress_values)>0):
+    if len(stress_values) > 0:
         stress_value = mean(stress_values)
 
-    myclient = pymongo.MongoClient("mongodb+srv://grupo3meia:Grupo3isbest@grupo3meia.twv654h.mongodb.net/?retryWrites=true&w=majority")
-    mydb = myclient["grupo3meia"]
-    mycol = mydb["Users"]
-    
-    USER = str(employees[int(employee)-1])
+    USER = str(employees[int(employee) - 1])
     print(USER)
     print(normal_value)
     print(stress_value)
 
-    #normal_value = 250
-    #stress_value = 350
+    # normal_value = 250
+    # stress_value = 350
 
-    myquery = { "username": USER }
-    newvalues = { "$set": { "avg_force": normal_value, "stress_level": stress_value} }
+    myquery = {"username": USER}
+    new_values = {"$set": {"avg_force": normal_value, "stress_level": stress_value}}
 
-    mycol.update_one(myquery, newvalues)
+    USERS.update_one(myquery, new_values)
 
 
 if __name__ == "__main__":
