@@ -137,7 +137,7 @@ def showUserAgenda(userTaskInfo, user):
     print(f"User {user} has {userTaskInfo['hours_todo_tommorrow']} hours available")
 
 
-def distributeTaskTommorrow(users, usersTaskInfo, tasks, debug=False):
+async def distributeTaskTommorrow(users, usersTaskInfo, tasks, debug=False):
     # sorts users based of how much free time they have tommorow
     users = sortUsers(users, usersTaskInfo)
 
@@ -276,7 +276,7 @@ async def distributeTask():
     # These are task in the queu that were assigned to the user
     # 1. Remove the task from DB "Task"
     # 2. Update Assigned task whit these "Task"
-    task_added, tasks, usersTaskInfo = distributeTaskTommorrow(users, usersTaskInfo, tasks)
+    task_added, tasks, usersTaskInfo = await distributeTaskTommorrow(users, usersTaskInfo, tasks)
 
     # # Delete and create a record in "Historic Task"
     await storeHistoricTask(task2Remove)

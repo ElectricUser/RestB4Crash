@@ -80,6 +80,7 @@ def clean_db():
     TASKS.delete_many({})
     NEXT_DAY_TASKS.delete_many({})
     DB['Historic_Task'].delete_many({})
+    DB['TaskPause'].delete_many({})
 
 
 async def add_stress(agent_jid):
