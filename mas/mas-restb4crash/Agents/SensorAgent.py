@@ -42,14 +42,10 @@ class SensorAgent(Agent):
             if last_value is not None:
                 msg.body = str(last_value)
                 await self.send(msg)
-                """msg.body = str(sensor_vals)
-                await self.send(msg)"""
-                """message = "" + sensor_vals[1] + "\n" + sensor_vals[3][:-1] + "\n" + str(
-                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"))"""
 
     async def setup(self):
         print("SensorAgent Created")
-        b = self.GetSensorsValuesBehaviour(period=2)
+        b = self.GetSensorsValuesBehaviour(period=10)
         self.add_behaviour(b)
         self.client = mqtt.Client()
         self.client.on_connect = receiverClient.on_connect

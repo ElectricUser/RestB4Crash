@@ -6,15 +6,15 @@ from utils import has_paused, has_stressed
 
 
 class EmployeeAgent(Agent):
-    class ReceiveFirstTasks(OneShotBehaviour):
+    class ReceiveFirstTasks(CyclicBehaviour):
         async def run(self):
             print("RecvBehav running")
 
-            msg = await self.receive(timeout=10) # wait for a message for 10 seconds
+            msg = await self.receive(timeout=2880) # wait for a message for 10 seconds
             if msg:
                 print(f"Message received on agent {self.agent.jid} with content: {msg.body}")
             else:
-                print("Did not received any message after 10 seconds")
+                print("Did not received any message after 120 seconds")
 
             # set status occupied with task
             self.status = "occupied" # Change with bd task query search
@@ -43,13 +43,6 @@ class EmployeeAgent(Agent):
                 avg_force = await get_user_avg_force(str(self.agent.jid))
                 if avg_force and has_stressed(F1s, avg_force):
                     await add_stress(str(self.agent.jid))
-
-            """if int(msg.body) >= 20:
-                print(f'Sensor values {msg.body} from {msg.sender}')
-                await add_stress(str(self.agent.jid))
-            else:
-                print("Message not received")
-                self.kill()"""
 
     async def setup(self):
         print(f"Employee {self.jid} started")

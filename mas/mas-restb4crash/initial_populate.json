@@ -3,8 +3,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
   "n_stress": 0
@@ -14,8 +12,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
   "n_stress": 0
@@ -25,8 +21,6 @@
   "description": "some task",
   "difficulty": 4,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -36,8 +30,6 @@
   "description": "some description",
   "difficulty": 1,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -47,8 +39,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -58,8 +48,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -69,8 +57,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -80,8 +66,6 @@
   "description": "some task",
   "difficulty": 4,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -91,8 +75,6 @@
   "description": "some description",
   "difficulty": 1,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -102,8 +84,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -113,8 +93,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -124,8 +102,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -135,8 +111,6 @@
   "description": "some task",
   "difficulty": 4,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -146,8 +120,6 @@
   "description": "some description",
   "difficulty": 1,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -157,8 +129,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -168,8 +138,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -179,8 +147,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -190,8 +156,6 @@
   "description": "some task",
   "difficulty": 4,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -201,8 +165,6 @@
   "description": "some description",
   "difficulty": 1,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -212,8 +174,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -223,8 +183,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -234,8 +192,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -245,8 +201,6 @@
   "description": "some task",
   "difficulty": 4,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -256,8 +210,6 @@
   "description": "some description",
   "difficulty": 1,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -267,8 +219,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -278,8 +228,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -289,8 +237,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -300,8 +246,6 @@
   "description": "some task",
   "difficulty": 4,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -311,8 +255,6 @@
   "description": "some description",
   "difficulty": 1,
   "estimated_hours": 1,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0
@@ -322,8 +264,6 @@
   "description": "some description",
   "difficulty": 2,
   "estimated_hours": 2,
-  "start_time": "some datetime format",
-  "end_time": "some datetime format",
   "status": "todo",
   "n_pauses": 0,
     "n_stress": 0

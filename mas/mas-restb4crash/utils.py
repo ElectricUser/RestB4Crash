@@ -15,6 +15,7 @@ def has_paused(pauses_list, frc_list1, frc_list2):
     return zeros
 
 
+# If force sensor > avg force of that user then it is considered that the user stressed out
 def has_stressed(force_sensor_list, avg_frc):
     counter = 1
     last_val = 0
@@ -25,5 +26,3 @@ def has_stressed(force_sensor_list, avg_frc):
             counter += 1
         last_val = x
     return False
-
-# print(has_stressed([1,2,3,4,5,6,7,7,7,9,5,10], 7))

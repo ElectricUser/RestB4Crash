@@ -16,8 +16,9 @@ int counter = 0;
 String topic2;
 String topic3;
 
-const char* ssid = "OnePlus 6";
-const char* password = "12345678";
+
+const char* ssid = "iPhone 13";
+const char* password = "omegalul";
 const char* mqtt_server = "broker.emqx.io";
 const char* mqtt_topic2 = "/sensors/initialValues";
 
@@ -107,6 +108,8 @@ void loop() {
   }
 
   counter = counter + 1;
+
+  client.publish(mqtt_topic2, "olá do outro lado");
 
   if (counter == 15) {
     Serial.println(topic2);
